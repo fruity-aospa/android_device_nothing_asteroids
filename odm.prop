@@ -1,0 +1,6 @@
+# QC Value Addons
+ro.vendor.qti.va_odm.support=1
+
+# USB
+ro.usb.uvc.disable_video_encode_flag=true
+ro.usb.uvc.enabled=true
