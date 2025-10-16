@@ -8,6 +8,7 @@ DEVICE_PATH := device/nothing/asteroids
 BUILD_BROKEN_DUP_RULES := true
 
 include build/make/target/board/BoardConfigMainlineCommon.mk
+include vendor/nothing/asteroids/BoardConfigVendor.mk
 
 # A/B
 AB_OTA_UPDATER := true
