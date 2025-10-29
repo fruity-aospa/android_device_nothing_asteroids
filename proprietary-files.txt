@@ -985,6 +985,16 @@ vendor/lib64/libfastcrc.so
 vendor/lib64/libfastcvdsp_stub.so
 vendor/lib64/libfastcvopt.so
 
+# FeliCa
+product/app/MobileFeliCaClient/MobileFeliCaClient.apk;PRESIGNED
+product/app/MobileFeliCaMenuMainApp/MobileFeliCaMenuMainApp.apk;PRESIGNED
+product/app/MobileFeliCaSettingApp/MobileFeliCaSettingApp.apk;PRESIGNED
+product/app/MobileFeliCaWebPluginBoot/MobileFeliCaWebPluginBoot.apk;PRESIGNED
+product/etc/sysconfig/felica-allowlist.xml
+vendor/etc/felica/common.cfg
+vendor/etc/felica/mfm.cfg
+vendor/etc/felica/mfs.cfg
+
 # Fingerprint
 vendor/bin/hw/vendor.nothing.hardware.biometrics.fingerprint-service
 vendor/etc/init/vendor.nothing.hardware.biometrics.fingerprint-service.rc
