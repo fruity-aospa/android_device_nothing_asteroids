@@ -1,0 +1,18 @@
+//
+// SPDX-FileCopyrightText: 2025 The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+cc_library_shared {
+    name: "libudfpshandler",
+    defaults: ["//hardware/nothing:nothing_hardware_biometrics_config_default"],
+    vendor: true,
+    srcs: ["UdfpsHandler.cpp"],
+    init_rc: ["libudfpshandler.rc"],
+    shared_libs: [
+        "libbase",
+    ],
+    header_libs: [
+        "//hardware/nothing:nothingfingerprint_headers",
+    ],
+}
