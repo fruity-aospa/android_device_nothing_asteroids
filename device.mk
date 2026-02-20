@@ -186,23 +186,9 @@ PRODUCT_PACKAGES += \
     librmnetctl \
     android.hardware.tetheroffload-V1-ndk
 
-# Display
-PRODUCT_PACKAGES += \
-    android.hardware.graphics.composer3-V2-ndk.vendor \
-    vendor.qti.hardware.display.composer-service.rc \
-    vendor.qti.hardware.display.composer-service.xml \
-    vendor.qti.hardware.display.composer3-V1-ndk.vendor \
-    vendor.qti.hardware.display.config-V1-ndk.vendor \
-    vendor.qti.hardware.display.config-V2-ndk.vendor \
-    vendor.qti.hardware.display.config-V3-ndk.vendor \
-    vendor.qti.hardware.display.config-V4-ndk.vendor \
-    vendor.qti.hardware.display.config-V5-ndk.vendor \
-    vendor.qti.hardware.display.config-V6-ndk.vendor \
-    vendor.qti.hardware.display.config-V7-ndk.vendor \
-    vendor.qti.hardware.display.config-V8-ndk.vendor \
-    vendor.qti.hardware.display.config-V9-ndk.vendor \
-    vendor.qti.hardware.display.config-V10-ndk.vendor \
-    vendor.qti.hardware.display.config-V11-ndk.vendor
+# Display HAL packages (composer, allocator, demura, mapper impl, SDM libs,
+# display_boot init scripts) are provided by hardware/qcom/display via
+# DISPLAY_MODULES_HARDWARE in the QTI display component.
 
 # Device Extras, Assist Key & Doze
 PRODUCT_PACKAGES += \
@@ -466,7 +452,7 @@ PRODUCT_SOONG_NAMESPACES += \
     hardware/qcom/wlan/qcwcn \
     hardware/qcom/wlan/qcwcn/wpa_supplicant_8_lib \
     kernel/nothing/sm7635 \
-    hardware/qcom-caf/sm8650 \
+    hardware/qcom/display \
     hardware/qcom-caf/sm8650/audio/st-hal-ar
 
 # Storage
