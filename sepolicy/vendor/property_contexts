@@ -13,6 +13,9 @@ persist.vendor.nfc_model               u:object_r:vendor_nfc_prop:s0
 vendor.nfc.config_file_name            u:object_r:vendor_nfc_prop:s0
 vendor.nfc_model                       u:object_r:vendor_nfc_prop:s0
 
+# Nothing feature
+ro.vendor.nothing.          u:object_r:vendor_nothing_feature_prop:s0
+
 # Secure Element
 persist.vendor.se.reset      u:object_r:vendor_secure_element_prop:s0
 persist.vendor.se.streset    u:object_r:vendor_secure_element_prop:s0
