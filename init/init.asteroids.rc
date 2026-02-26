@@ -85,6 +85,12 @@ on property:vendor.all.modules.ready=1
 
     start asteroids_nfc_detect
 
+on property:vendor.nfc.config_file_name=*
+    setprop persist.vendor.nfc.config_file_name ${vendor.nfc.config_file_name}
+
+on property:vendor.nfc_model=*
+    setprop persist.vendor.nfc_model ${vendor.nfc_model}
+
 service asteroids_nfc_detect /odm/bin/init.asteroids.nfc.sh
     class main
     user shell
