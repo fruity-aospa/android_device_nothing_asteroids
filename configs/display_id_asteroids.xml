@@ -71,7 +71,7 @@
         </point>
         <point>
             <value>1.0</value>
-            <nits>1174.0</nits>
+            <nits>1300.0</nits>
         </point>
     </screenBrightnessMap>
 
@@ -127,8 +127,12 @@
                 <hdrRatio>2.2</hdrRatio>
             </point>
             <point>
-                <sdrNits>700.0</sdrNits>
-                <hdrRatio>1.7</hdrRatio>
+                <sdrNits>800.0</sdrNits>
+                <hdrRatio>3.65</hdrRatio>
+            </point>
+            <point>
+                <sdrNits>1300.0</sdrNits>
+                <hdrRatio>2.246</hdrRatio>
             </point>
         </sdrHdrRatioMap>
     </highBrightnessMode>
