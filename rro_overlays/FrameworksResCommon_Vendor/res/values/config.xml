@@ -318,4 +318,9 @@
 
     <!-- Flag indicating which package name can access the persistent data partition -->
     <string translatable="false" name="config_persistentDataPackageName">com.google.android.gms</string>
+
+    <!-- Device-specific array of SIM slot indexes which are are embedded eUICCs. -->
+    <integer-array name="non_removable_euicc_slots">
+        <item>1</item>
+    </integer-array>
 </resources>
