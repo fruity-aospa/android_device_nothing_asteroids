@@ -159,6 +159,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     NothingEuicc
 
+# FeliCa
+PRODUCT_PACKAGES += \
+    NothingFelicaDisabler
+
 # FWK Detect
 PRODUCT_PACKAGES += \
     libvndfwk_detect_jni.qti_vendor
