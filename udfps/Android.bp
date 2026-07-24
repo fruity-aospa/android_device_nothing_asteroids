@@ -9,6 +9,7 @@ cc_library_shared {
     vendor: true,
     srcs: ["UdfpsHandler.cpp"],
     init_rc: ["libudfpshandler.rc"],
+    cflags: ["-DTARGET_USES_LHBM"],
     shared_libs: [
         "libbase",
     ],
