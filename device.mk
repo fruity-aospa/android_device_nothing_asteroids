@@ -449,6 +449,10 @@ PRODUCT_SOONG_NAMESPACES += \
 # Storage
 PRODUCT_CHARACTERISTICS := nosdcard
 
+# Task profiles
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/task_profiles.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
+
 # Telephony
 # Only the QSSI half of the QTI telephony component: its vendor half also
 # exports vendor/qcom/opensource/data-ipa-cfg-mgr, which clashes with the
