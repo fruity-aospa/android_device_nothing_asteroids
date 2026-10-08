@@ -229,6 +229,12 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.hardware_keystore_V3.xml
 
+# Lights
+$(call soong_config_set,nothing_glyph,device,phone3a)
+
+PRODUCT_PACKAGES += \
+    android.hardware.lights-service.glyph
+
 # Lineage Health
 $(call soong_config_set,lineage_health,charging_control_charging_path,/proc/charger/usb_charger_en)
 
