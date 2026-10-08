@@ -863,12 +863,6 @@ vendor/lib64/libsnapdragoncolor-manager.so
 vendor/lib64/libsnapdragoncolor-qdcm.so
 vendor/lib64/vendor.qti.hardware.qdutils_disp@1.0.so
 
-# Display (Lights)
-vendor/bin/hw/vendor.qti.hardware.lights.service
-vendor/etc/init/vendor.qti.hardware.lights.service.rc
-vendor/etc/vintf/manifest/vendor.qti.hardware.lights.service.xml
-vendor/lib64/vendor.hardware.light-V1-ndk_platform.so
-
 # Display (SDM)
 vendor/etc/display/DPU1010.xml
 vendor/etc/display/DPU1020.xml
