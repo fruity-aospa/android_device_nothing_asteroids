@@ -59,11 +59,14 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib64/libsnapdragoncolor-manager.so',
     ): blob_fixup()
         .replace_needed('libtinyxml2.so', 'libtinyxml2-v34.so'),
-    'vendor/bin/qcc-vendor': blob_fixup()
-        .add_needed('libbinder_shim.so'),
-    'vendor/bin/qms': blob_fixup()
-        .add_needed('libbinder_shim.so'),
-    'vendor/bin/xtra-daemon': blob_fixup()
+    (
+        'vendor/lib64/libqms_client.so',
+        'vendor/bin/qcc-vendor',
+        'vendor/bin/xtra-daemon',
+        'vendor/bin/qms',
+        'vendor/lib64/libcne.so',
+        'vendor/lib64/libqcc_sdk.so',
+    ): blob_fixup()
         .add_needed('libbinder_shim.so'),
     'vendor/lib64/libarcsoft_dark_vision_raw.so': blob_fixup()
         .clear_symbol_version('remote_register_buf')
@@ -77,8 +80,6 @@ blob_fixups: blob_fixups_user_type = {
         'libtensorflowlite_c.so',
         'libtensorflowlite_c_vendor.so',
     ),
-    'vendor/lib64/libcne.so': blob_fixup()
-        .add_needed('libbinder_shim.so'),
     'vendor/lib64/libmorpho_RapidEffect.so': blob_fixup()
         .clear_symbol_version('AHardwareBuffer_allocate')
         .clear_symbol_version('AHardwareBuffer_describe')
@@ -92,8 +93,6 @@ blob_fixups: blob_fixups_user_type = {
     'vendor/lib64/vendor.libdpmframework.so': blob_fixup()
         .add_needed('libbinder_shim.so')
         .add_needed('libhidlbase_shim.so'),
-    'vendor/lib64/libqcc_sdk.so': blob_fixup()
-        .add_needed('libbinder_shim.so'),
     'vendor/lib64/libqcodec2_core.so': blob_fixup()
         .add_needed('libcodec2_shim.so'),
     'vendor/lib64/libwa_sat.so': blob_fixup()
