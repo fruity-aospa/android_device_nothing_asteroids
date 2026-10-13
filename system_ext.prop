@@ -33,6 +33,19 @@ ro.media.recorder-max-base-layer-fps=60
 # Netmgr
 persist.vendor.data.mode=concurrent
 
+# Nothing features
+ro.build.nothing.feature.base=0x1004458438124a040126b4247b97ffL
+ro.build.nothing.feature.diff.device.Asteroids=0xa80c901acc038d140ad44002d8842080L
+ro.build.nothing.feature.diff.plus.Asteroids=0x4000000000000000000000L
+ro.build.nothing.feature.diff.product.AsteroidsEEA=0x8000000000000000000000L
+ro.build.nothing.feature.diff.product.AsteroidsIND=0x10000000000000000000000L
+ro.build.nothing.feature.diff.product.AsteroidsJPN=0x100000120000000000000000000000L
+ro.build.nothing.feature.diff.product.AsteroidsPro=0x100000000000000000000000L
+ro.build.nothing.feature.diff.product.AsteroidsProEEA=0x108000000000000000000000L
+ro.build.nothing.feature.diff.product.AsteroidsProIND=0x10000000000000000000000L
+ro.build.nothing.feature.diff.product.AsteroidsProTUR=0x20100000000000000000000000L
+ro.build.nothing.feature.diff.product.AsteroidsTUR=0x20000000000000000000000000L
+
 # QC Value Addons
 ro.vendor.qti.va_aosp.support=1
 
