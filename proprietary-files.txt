@@ -967,9 +967,6 @@ vendor/etc/felica/mfm.cfg
 vendor/etc/felica/mfs.cfg
 
 # Fingerprint
-vendor/bin/hw/vendor.nothing.hardware.biometrics.fingerprint-service
-vendor/etc/init/vendor.nothing.hardware.biometrics.fingerprint-service.rc
-vendor/etc/vintf/manifest/vendor.nothing.hardware.biometrics.fingerprint-service.xml
 vendor/firmware/goodixfp64.b00
 vendor/firmware/goodixfp64.b01
 vendor/firmware/goodixfp64.b02
