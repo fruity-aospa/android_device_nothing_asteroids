@@ -141,6 +141,7 @@ vendor.gatekeeper.is_security_level_spu=0
 # Media
 debug.stagefright.c2inputsurface=-1
 debug.stagefright.omx_default_rank=0
+ro.mediaserver.64b.enable=true
 vendor.qc2audio.per_frame.flac.dec.enabled=true
 vendor.qc2audio.suspend.enabled=true
 
