@@ -57,6 +57,8 @@ ro.camera.enableCamera1MaxZsl=1
 ro.camera.disableHeicUltraHDR=true
 
 # Display
+debug.renderengine.backend=skiavkthreaded
+persist.sys.display_refresh_rates_list=60,120
 vendor.display.comp_mask=0
 vendor.display.disable_3d_adaptive_tm=1
 vendor.display.disable_cwb_idle_fallback=1
@@ -70,7 +72,7 @@ vendor.display.disable_sdr_dimming=0
 vendor.display.disable_sdr_histogram=1
 vendor.display.disable_stc_dimming=1
 vendor.display.enable_async_vds_creation=1
-vendor.display.enable_dpps_dynamic_fps=1
+vendor.display.enable_dpps_dynamic_fps=0
 vendor.display.enable_hdr10_gpu_target=1
 vendor.display.enable_optimize_refresh=0
 vendor.display.enable_rounded_corner=1
@@ -116,6 +118,8 @@ debug.sf.use_phase_offsets_as_durations=1
 persist.sys.sf.native_mode=260
 persist.sys.sf.stacked_blur=true
 ro.surface_flinger.clear_slots_with_set_layer_buffer=false
+ro.surface_flinger.enable_frame_rate_override=true
+ro.surface_flinger.enable_layer_caching=true
 ro.surface_flinger.force_hwc_copy_for_virtual_displays=true
 ro.surface_flinger.game_default_frame_rate_override=60
 ro.surface_flinger.has_HDR_display=true
