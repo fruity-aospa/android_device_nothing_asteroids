@@ -21,10 +21,7 @@ from extract_utils.main import (
 namespace_imports = [
     'hardware/nothing',
     'hardware/qcom-caf/sm8650',
-    'hardware/qcom-caf/wlan',
-    'vendor/qcom/opensource/commonsys/display',
-    'vendor/qcom/opensource/commonsys-intf/display',
-    'vendor/qcom/opensource/dataservices',
+    'vendor/qcom/common/vendor/perf',
 ]
 
 def lib_fixup_vendor_suffix(lib: str, partition: str, *args, **kwargs):
@@ -38,6 +35,8 @@ lib_fixups: lib_fixups_user_type = {
         'vendor.qti.ImsRtpService-V1-ndk',
         'vendor.qti.diaghal@1.0',
         'vendor.qti.hardware.dpmaidlservice-V1-ndk',
+        'vendor.qti.hardware.limits@1.0',
+        'vendor.qti.hardware.limits@1.1',
         'vendor.qti.hardware.qccsyshal@1.0',
         'vendor.qti.hardware.qccsyshal@1.1',
         'vendor.qti.hardware.qccsyshal@1.2',
@@ -45,6 +44,7 @@ lib_fixups: lib_fixups_user_type = {
         'vendor.qti.imsrtpservice@3.0',
         'vendor.qti.imsrtpservice@3.1',
         'vendor.qti.qccvndhal_aidl-V1-ndk',
+        'vendor.qti.qspmhal-V1-ndk',
     ): lib_fixup_vendor_suffix,
 }
 
@@ -58,9 +58,7 @@ blob_fixups: blob_fixups_user_type = {
     'vendor/bin/hw/android.hardware.biometrics.face-service.noth': blob_fixup()
         .replace_needed('libcamera2ndk_vendor.so', 'libcamera2ndk_vendor-v34.so'),
     (
-        'vendor/bin/poweropt-service',
         'vendor/lib64/libdpps.so',
-        'vendor/lib64/libpowercore.so',
         'vendor/lib64/libsnapdragoncolor-manager.so',
     ): blob_fixup()
         .replace_needed('libtinyxml2.so', 'libtinyxml2-v34.so'),
