@@ -83,8 +83,6 @@ lib_fixups: lib_fixups_user_type = {
 }
 
 blob_fixups: blob_fixups_user_type = {
-    'system_ext/lib64/vendor.qti.hardware.qccsyshal@1.2-halimpl.so': blob_fixup()
-        .replace_needed('libprotobuf-cpp-full.so', 'libprotobuf-cpp-full-21.7.so'),
     'vendor/bin/hw/android.hardware.biometrics.face-service.noth': blob_fixup()
         .replace_needed('libcamera2ndk_vendor.so', 'libcamera2ndk_vendor-v34.so'),
     (
