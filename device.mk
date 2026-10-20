@@ -395,14 +395,12 @@ PRODUCT_COPY_FILES += \
 
 # Perf
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/perf/perfconfigstore.xml:$(TARGET_COPY_OUT_VENDOR)/etc/perf/perfconfigstore.xml
+    $(call find-copy-subdir-files,*,device/qcom/common/vendor/perf/configs/common,$(TARGET_COPY_OUT_VENDOR)/etc) \
+    $(call find-copy-subdir-files,*,device/qcom/common/vendor/perf/configs/volcano,$(TARGET_COPY_OUT_VENDOR)/etc)
 
 # Power
 PRODUCT_PACKAGES += \
     android.hardware.power-service-qti
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/perf/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
 
 # Project ID Quota
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
