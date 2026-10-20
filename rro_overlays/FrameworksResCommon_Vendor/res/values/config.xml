@@ -6,13 +6,25 @@
          The brightness values must be between 0 and 255 and be non-decreasing.
          This must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>10</item>
         <item>20</item>
-        <item>40</item>
-        <item>70</item>
-        <item>110</item>
-        <item>160</item>
-        <item>200</item>
+        <item>22</item>
+        <item>34</item>
+        <item>52</item>
+        <item>74</item>
+        <item>80</item>
+        <item>83</item>
+        <item>93</item>
+        <item>100</item>
+        <item>105</item>
+        <item>116</item>
+        <item>125</item>
+        <item>134</item>
+        <item>149</item>
+        <item>154</item>
+        <item>183</item>
+        <item>195</item>
+        <item>214</item>
+        <item>229</item>
         <item>255</item>
     </integer-array>
 
@@ -37,13 +49,25 @@
 
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
+        <item>1</item>
+        <item>4</item>
         <item>10</item>
-        <item>30</item>
+        <item>25</item>
         <item>60</item>
-        <item>100</item>
         <item>150</item>
-        <item>210</item>
-        <item>255</item>
+        <item>390</item>
+        <item>620</item>
+        <item>750</item>
+        <item>1000</item>
+        <item>1300</item>
+        <item>1700</item>
+        <item>2800</item>
+        <item>3500</item>
+        <item>4500</item>
+        <item>7000</item>
+        <item>8000</item>
+        <item>20000</item>
+        <item>40000</item>
     </integer-array>
 
     <!-- Indicate available ColorDisplayManager.COLOR_MODE_xxx. -->
@@ -240,7 +264,7 @@
          the framework from using higher refresh rates, even if display modes with higher refresh
          rates are available from hardware composer. Only has an effect if the value is
          non-zero. -->
-    <integer name="config_defaultPeakRefreshRate">240</integer>
+    <integer name="config_defaultPeakRefreshRate">120</integer>
 
     <!-- The default refresh rate for a given device. Change this value to set a higher default
          refresh rate. If the hardware composer on the device supports display modes with a higher
@@ -250,7 +274,7 @@
          If a non-zero value is set for config_defaultPeakRefreshRate, then
          config_defaultRefreshRate may be set to 0, in which case the value set for
          config_defaultPeakRefreshRate will act as the default frame rate. -->
-    <integer name="config_defaultRefreshRate">0</integer>
+    <integer name="config_defaultRefreshRate">120</integer>
 
     <!--The default "usage setting" indicating that the device is either a voice-centric
     device (1) or a data-centric device (2). A voice-centric device will require that any cellular
@@ -273,7 +297,7 @@
     <!-- Screen brightness used to dim the screen while dozing in a very low power state.
          May be less than the minimum allowed brightness setting
          that can be set by the user. -->
-    <integer name="config_screenBrightnessDoze">17</integer>
+    <integer name="config_screenBrightnessDoze">29</integer>
 
     <!-- ComponentName of a dream to show whenever the system would otherwise have
          gone to sleep.  When the PowerManager is asked to go to sleep, it will instead
@@ -294,4 +318,9 @@
 
     <!-- Flag indicating which package name can access the persistent data partition -->
     <string translatable="false" name="config_persistentDataPackageName">com.google.android.gms</string>
+
+    <!-- Device-specific array of SIM slot indexes which are are embedded eUICCs. -->
+    <integer-array name="non_removable_euicc_slots">
+        <item>1</item>
+    </integer-array>
 </resources>
