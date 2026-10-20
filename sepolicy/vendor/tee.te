@@ -2,3 +2,7 @@
 allow tee vendor_gpt_block_device:blk_file { read open };
 allow tee vendor_xbl_block_device:blk_file { read open };
 allow tee boot_block_device:blk_file { read open };
+
+# Allow tee to read symlinks in block devices (e.g., ssd)
+allow tee vendor_ssd_block_device:lnk_file { getattr read };
+allow tee block_device:lnk_file { getattr read };
