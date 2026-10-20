@@ -72,20 +72,36 @@ on boot
     mkdir data/vendor/fpdump 0777 system system
     restorecon /data/vendor/fpdump
 
+    chmod 0660 /proc/touchpanel/TP_charger_flags
+    chown system system /proc/touchpanel/TP_charger_flags
+    chmod 0660 /proc/touchpanel/pocket_mode
+    chown system system /proc/touchpanel/pocket_mode
+
 on property:sys.boot_completed=1
     swapon_all /odm/etc/fstab.zram.2g
 
     write /dev/cpuset/background/cpus 0-2
     write /dev/cpuset/system-background/cpus 0-5
 
+    chown system system /proc/charger/nt_otg_enable
+    chmod 0664 /proc/charger/nt_otg_enable
+
 on property:sys.touch.pocket_mode=*
     write /proc/touchpanel/pocket_mode ${sys.touch.pocket_mode}
 
 on property:vendor.all.modules.ready=1
     chown system system /proc/touchpanel/fod_mode
+    chown system system /proc/touchpanel/pocket_mode
+    chmod 0660 /proc/touchpanel/pocket_mode
     chown system system /sys/panel_feature/fp_status
 
     start asteroids_nfc_detect
+
+on property:sys.boot_completed=1 && property:persist.sys.sltntc.enable=0
+    stop sltntc
+
+on property:sys.boot_completed=1 && property:persist.sys.sltntc.enable=1
+    start sltntc
 
 on property:vendor.nfc.config_file_name=*
     setprop persist.vendor.nfc.config_file_name ${vendor.nfc.config_file_name}
@@ -93,9 +109,20 @@ on property:vendor.nfc.config_file_name=*
 on property:vendor.nfc_model=*
     setprop persist.vendor.nfc_model ${vendor.nfc_model}
 
+on property:sys.usb.state=*
+    write /sys/class/power_supply/battery/uevent "change"
+    write /sys/class/power_supply/usb/uevent "change"
+
 service asteroids_nfc_detect /odm/bin/init.asteroids.nfc.sh
     class main
     user shell
     group shell
     disabled
     oneshot
+
+service sltntc /system_ext/bin/sltntc
+    class hal
+    user system
+    group system readproc root
+    disabled
+

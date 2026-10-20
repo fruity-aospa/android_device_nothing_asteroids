@@ -6,6 +6,9 @@
 $(call inherit-product, hardware/qcom-caf/common/common.mk)
 $(call inherit-product, vendor/nothing/asteroids/asteroids-vendor.mk)
 
+# Dolby (optional)
+$(call inherit-product-if-exists, hardware/dolby/dolby.mk)
+
 # A/B
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/vabc_features.mk)
 
@@ -46,6 +49,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.vulkan.deqp.level-2023-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.vulkan.deqp.level.xml
 
 # Audio
+$(call soong_config_set_bool,android_hardware_audio,skip_speaker_layout_channel_mask_field,true)
+
 AUDIO_HAL_DIR := hardware/qcom-caf/sm8650/audio/primary-hal
 AUDIO_PAL_DIR := hardware/qcom-caf/sm8650/audio/pal
 
@@ -59,7 +64,6 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
     $(AUDIO_HAL_DIR)/configs/volcano/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_volcano/audio_effects.conf \
-    $(AUDIO_HAL_DIR)/configs/volcano/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_volcano/audio_effects.xml \
     $(AUDIO_HAL_DIR)/configs/volcano/microphone_characteristics.xml:$(TARGET_COPY_OUT_VENDOR)/etc/microphone_characteristics.xml \
     $(AUDIO_PAL_DIR)/configs/volcano/card-defs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/card-defs.xml
 
@@ -69,6 +73,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
     $(LOCAL_PATH)/audio/mixer_paths_volcano_qrd.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_volcano/mixer_paths_volcano_qrd.xml \
     $(LOCAL_PATH)/audio/resourcemanager_volcano_qrd.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_volcano/resourcemanager_volcano_qrd.xml \
+    $(LOCAL_PATH)/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_volcano/audio_effects.xml \
     $(LOCAL_PATH)/audio/usecaseKvManager.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usecaseKvManager.xml
 
 PRODUCT_PACKAGES += \
@@ -77,21 +82,40 @@ PRODUCT_PACKAGES += \
     android.hardware.audio.service \
     android.hardware.soundtrigger@2.3-impl \
     audio.bluetooth.default \
+    audio.primary.volcano \
     audio.r_submix.default \
     audio.usb.default \
+    audioadsprpcd \
+    lib_bt_aptx \
+    lib_bt_ble \
+    lib_bt_bundle \
+    libagm_compress_plugin \
+    libagm_mixer_plugin \
+    libagm_pcm_plugin \
+    libaudiochargerlistener \
+    libbatterylistener \
+    libcustomva_intf \
+    libfmpal \
     libhapticgenerator \
+    libhfp_pal \
+    libhotword_intf \
+    libpalclient \
+    libqcompostprocbundle \
+    libqcomvisualizer \
+    libqcomvoiceprocessing \
+    libvolumelistener \
     sound_trigger.primary.volcano
 
 # Biometrics
 PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint-service.nothing \
-    libudfpshandler
+    android.hardware.biometrics.fingerprint-service.nothing
 
-$(call soong_config_set,NOTHING_BIOMETRICS_FINGERPRINT,IMPL_VER,V2)
+$(call soong_config_set_bool,nothing_fingerprint,use_lhbm,true)
 
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.biometrics.face.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.biometrics.face.xml \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
+
+TARGET_HAS_UDFPS := true
 
 # Bluetooth
 PRODUCT_COPY_FILES += \
@@ -142,8 +166,10 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.display.composer-service \
     vendor.qti.hardware.display.demura-service
 
-# Doze
+# Device Extras, Assist Key & Doze
 PRODUCT_PACKAGES += \
+    AssistKey \
+    DeviceExtras \
     NothingDoze
 
 # eUICC
@@ -241,7 +267,6 @@ $(call soong_config_set,lineage_health,charging_control_charging_path,/proc/char
 PRODUCT_PACKAGES += \
     vendor.lineage.health-service.default
 
-# LiveDisplay
 $(call soong_config_set_bool,livedisplay_sdm,enable_dm,false)
 
 PRODUCT_PACKAGES += \
@@ -273,6 +298,13 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/nfc/libnfc-hal-st54j-JPN.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-hal-st54j-JPN.conf \
     $(LOCAL_PATH)/configs/nfc/libnfc-hal-st54j-PRO.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-hal-st54j-PRO.conf \
     $(LOCAL_PATH)/configs/nfc/libnfc-nci-JPN.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nci-JPN.conf
+
+# Nothing-fwk
+PRODUCT_PACKAGES += \
+    nothing-fwk
+
+PRODUCT_BOOT_JARS += \
+    nothing-fwk
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.ese.xml:$(TARGET_COPY_OUT_ODM)/etc/permissions/sku_JPN/android.hardware.nfc.ese.xml \
@@ -336,9 +368,16 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/privapp-permissions-product.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-nothing.xml \
     $(LOCAL_PATH)/configs/sysconfig_wfc.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/sysconfig_wfc.xml
 
+# Perf
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/perf/perfconfigstore.xml:$(TARGET_COPY_OUT_VENDOR)/etc/perf/perfconfigstore.xml
+
 # Power
 PRODUCT_PACKAGES += \
     android.hardware.power-service-qti
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/perf/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
 
 # Project ID Quota
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
@@ -414,6 +453,10 @@ PRODUCT_SOONG_NAMESPACES += \
 
 # Storage
 PRODUCT_CHARACTERISTICS := nosdcard
+
+# Task profiles
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/task_profiles.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
 
 # Telephony
 PRODUCT_COPY_FILES += \
