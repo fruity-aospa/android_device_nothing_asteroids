@@ -5,6 +5,7 @@
 
 # Platform
 TARGET_BOARD_PLATFORM := volcano
+TARGET_KERNEL_VERSION := 6.6
 TARGET_USES_KERNEL_PLATFORM := false
 
 $(call inherit-product, vendor/nothing/asteroids/asteroids-vendor.mk)
