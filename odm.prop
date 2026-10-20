@@ -1,3 +1,8 @@
+# Nt-fwk (Nt feature)
+ro.vendor.nothing.feature.diff.device.Asteroids=0xa80c901acc038d140ad44002d8842080L
+ro.vendor.nothing.feature.diff.plus.Asteroids=0x4000000000000000000000L
+ro.vendor.nothing.feature.base=0x1004458438124a040126b4247b97ffL
+
 # QC Value Addons
 ro.vendor.qti.va_odm.support=1
 
@@ -8,3 +13,4 @@ ro.usb.uvc.enabled=true
 # SKU Properties
 ro.product.property_source_order=odm,vendor,product,system_ext,system
 import /odm/etc/build_${ro.boot.hardware.sku}.prop
+

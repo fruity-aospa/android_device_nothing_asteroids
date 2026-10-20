@@ -1,5 +1,0 @@
-# Charging
-type vendor_proc_power_supply, fs_type, proc_type;
-
-# NTF
-type vendor_ntf_file, file_type;
