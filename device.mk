@@ -3,7 +3,10 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-$(call inherit-product, hardware/qcom-caf/common/common.mk)
+# Platform
+TARGET_BOARD_PLATFORM := volcano
+TARGET_USES_KERNEL_PLATFORM := false
+
 $(call inherit-product, vendor/nothing/asteroids/asteroids-vendor.mk)
 
 # Dolby (optional)
@@ -165,6 +168,7 @@ PRODUCT_PACKAGES += \
     init.qti.display_boot.sh \
     vendor.qti.hardware.display.allocator-service \
     vendor.qti.hardware.display.composer-service \
+    vendor.qti.hardware.display.composer-service.xml \
     vendor.qti.hardware.display.demura-service
 
 # Device Extras, Assist Key & Doze
@@ -262,16 +266,11 @@ $(call soong_config_set,nothing_glyph,device,phone3a)
 PRODUCT_PACKAGES += \
     android.hardware.lights-service.glyph
 
-# Lineage Health
+# Health extension
 $(call soong_config_set,lineage_health,charging_control_charging_path,/proc/charger/usb_charger_en)
 
 PRODUCT_PACKAGES += \
     vendor.lineage.health-service.default
-
-$(call soong_config_set_bool,livedisplay_sdm,enable_dm,false)
-
-PRODUCT_PACKAGES += \
-    vendor.lineage.livedisplay-service.sdm
 
 # Media
 PRODUCT_COPY_FILES += \
@@ -311,7 +310,7 @@ PRODUCT_PACKAGES += \
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
-    $(LOCAL_PATH)/overlay-lineage
+    $(LOCAL_PATH)/overlay
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rro_overlays/partition_order.xml:$(TARGET_COPY_OUT_PRODUCT)/overlay/partition_order.xml
@@ -320,7 +319,9 @@ PRODUCT_ENFORCE_RRO_TARGETS := *
 
 PRODUCT_PACKAGES += \
     AsteroidsApertureDevOverlay \
-    AsteroidsApertureOverlay \
+    AsteroidsApertureOverlay
+
+PRODUCT_PACKAGES += \
     AsteroidsFrameworksOverlay \
     AsteroidsMainlineWifiOverlay \
     AsteroidsProMainlineWifiOverlay \
@@ -436,7 +437,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
     hardware/nothing \
-    kernel/nothing/sm7635
+    hardware/qcom/wlan/qcwcn \
+    hardware/qcom/wlan/qcwcn/wpa_supplicant_8_lib \
+    kernel/nothing/sm7635 \
+    hardware/qcom-caf/sm8650
 
 # Storage
 PRODUCT_CHARACTERISTICS := nosdcard
@@ -470,8 +474,7 @@ PRODUCT_PACKAGES += \
     qcrilNrDb_vendor
 
 PRODUCT_BOOT_JARS += \
-    nt-telephony-interface \
-    telephony-ext
+    nt-telephony-interface
 
 # Thermal
 PRODUCT_PACKAGES += \
