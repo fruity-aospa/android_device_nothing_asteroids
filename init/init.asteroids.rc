@@ -72,11 +72,19 @@ on boot
     mkdir data/vendor/fpdump 0777 system system
     restorecon /data/vendor/fpdump
 
+    chmod 0660 /proc/touchpanel/TP_charger_flags
+    chown system system /proc/touchpanel/TP_charger_flags
+    chmod 0660 /proc/touchpanel/pocket_mode
+    chown system system /proc/touchpanel/pocket_mode
+
 on property:sys.boot_completed=1
     swapon_all /odm/etc/fstab.zram.2g
 
     write /dev/cpuset/background/cpus 0-2
     write /dev/cpuset/system-background/cpus 0-5
+
+    chown system system /proc/charger/nt_otg_enable
+    chmod 0664 /proc/charger/nt_otg_enable
 
 on property:sys.touch.pocket_mode=*
     write /proc/touchpanel/pocket_mode ${sys.touch.pocket_mode}

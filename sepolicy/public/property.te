@@ -1,0 +1,5 @@
+# Nothing feature
+type vendor_nothing_feature_prop, property_type, vendor_property_type, vendor_public_property_type;
+
+# NFC
+system_public_prop(vendor_persist_nfc_prop)

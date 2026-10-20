@@ -1,5 +1,8 @@
 # Battery
-genfscon proc /charger/usb_charger_en    u:object_r:vendor_proc_power_supply:s0
+genfscon proc /charger   u:object_r:vendor_proc_power_supply:s0
+genfscon proc /charger/usb_charger_en u:object_r:vendor_proc_power_supply:s0
+genfscon proc /touchpanel/TP_charger_flags   u:object_r:vendor_proc_power_supply:s0
+genfscon sysfs /class/power_supply/battery u:object_r:vendor_sysfs_battery_supply:s0
 
 # Display
 genfscon sysfs /panel_feature/panel_id1    u:object_r:vendor_sysfs_graphics:s0
@@ -7,16 +10,25 @@ genfscon sysfs /panel_feature/panel_id1    u:object_r:vendor_sysfs_graphics:s0
 # Extcon
 genfscon sysfs /devices/platform/soc/soc:spf_core_platform/soc:spf_core_platform:lpass-cdc/wcd9378-codec/extcon    u:object_r:sysfs_extcon:s0
 
+# Lights
+genfscon sysfs /devices/platform/soc/8c0000.qcom,qupv3_1_geni_se/880000.i2c/i2c-7/7-003a/leds/aw20036_led/all_brightness    u:object_r:vendor_sysfs_glyph:s0
+genfscon sysfs /devices/platform/soc/8c0000.qcom,qupv3_1_geni_se/880000.i2c/i2c-7/7-003a/leds/aw20036_led/all_white_brightness    u:object_r:vendor_sysfs_glyph:s0
+genfscon sysfs /devices/platform/soc/8c0000.qcom,qupv3_1_geni_se/880000.i2c/i2c-7/7-003a/leds/aw20036_led/frame_brightness        u:object_r:vendor_sysfs_glyph:s0
+genfscon sysfs /devices/platform/soc/8c0000.qcom,qupv3_1_geni_se/880000.i2c/i2c-7/7-003a/leds/aw20036_led/operating_mode          u:object_r:vendor_sysfs_glyph:s0
+genfscon sysfs /devices/platform/soc/8c0000.qcom,qupv3_1_geni_se/880000.i2c/i2c-7/7-003a/leds/aw20036_led/single_brightness       u:object_r:vendor_sysfs_glyph:s0
+
+# Scheduler
+genfscon proc /sys/walt/sched_boost u:object_r:proc_sched:s0
+
 # Touch
+genfscon proc /touchpanel/pocket_mode                                                                       u:object_r:vendor_proc_display:s0
 genfscon sysfs /devices/platform/soc/ac0000.qcom,qupv3_0_geni_se/a80000.spi/spi_master/spi0/spi0.0/fts_fod_enabled                   u:object_r:vendor_sysfs_touch:s0
 genfscon sysfs /devices/platform/soc/ac0000.qcom,qupv3_0_geni_se/a80000.spi/spi_master/spi0/spi0.0/fts_fod_pressed                   u:object_r:vendor_sysfs_touch:s0
 genfscon sysfs /devices/platform/soc/ac0000.qcom,qupv3_0_geni_se/a80000.spi/spi_master/spi0/spi0.0/fts_gesture_single_tap_enabled    u:object_r:vendor_sysfs_touch:s0
 genfscon sysfs /devices/platform/soc/ac0000.qcom,qupv3_0_geni_se/a80000.spi/spi_master/spi0/spi0.0/fts_gesture_single_tap_pressed    u:object_r:vendor_sysfs_touch:s0
 
-# Vibrator
-genfscon sysfs /devices/platform/soc/8c0000.qcom,qupv3_1_geni_se/884000.i2c/i2c-8/8-005f/leds/vibrator_nt    u:object_r:sysfs_leds:s0
-
 # Wakeup
+genfscon sysfs /devices/platform/soc/a600000.ssusb/a600000.dwc3/xhci-hcd.1.auto/usb1/1-1/wakeup              u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/8c0000.qcom,qupv3_1_geni_se/880000.i2c/i2c-7/7-003a/wakeup              u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/soc:goodix_fp/wakeup                                                    u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/ac0000.qcom,qupv3_0_geni_se/a80000.spi/spi_master/spi0/spi0.0/wakeup    u:object_r:sysfs_wakeup:s0
