@@ -12,6 +12,7 @@ TARGET_USES_KERNEL_PLATFORM := false
 TARGET_COMMON_QTI_COMPONENTS := \
     alarm \
     av \
+    gps \
     perf \
     wfd
 
@@ -224,10 +225,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     GlyphAdapter \
     ParanoidGlyphPhone3a
-
-# GPS
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.location.gps.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.location.gps.xml
 
 # Graphics
 PRODUCT_REQUIRES_INSECURE_EXECMEM_FOR_SWIFTSHADER := true
