@@ -157,10 +157,15 @@ PRODUCT_PACKAGES += \
 $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 
 # Data
+PRODUCT_SOONG_NAMESPACES += \
+    vendor/qcom/opensource/data-ipa-cfg-mgr
+
 PRODUCT_PACKAGES += \
     IPACM_Filter_cfg.xml \
     IPACM_cfg.xml \
-    ipacm
+    ipacm \
+    librmnetctl \
+    android.hardware.tetheroffload-V1-ndk
 
 # Display
 PRODUCT_COPY_FILES += \
