@@ -215,7 +215,8 @@ PRODUCT_PACKAGES += \
 
 # Glyph
 PRODUCT_PACKAGES += \
-    ParanoidGlyph
+    GlyphAdapter \
+    ParanoidGlyphPhone3a
 
 # GPS
 PRODUCT_COPY_FILES += \
