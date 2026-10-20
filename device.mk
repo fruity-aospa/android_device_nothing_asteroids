@@ -11,7 +11,9 @@ TARGET_USES_KERNEL_PLATFORM := false
 # QTI components
 TARGET_COMMON_QTI_COMPONENTS := \
     alarm \
-    perf
+    av \
+    perf \
+    wfd
 
 $(call inherit-product, vendor/nothing/asteroids/asteroids-vendor.mk)
 
