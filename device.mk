@@ -58,6 +58,9 @@ PRODUCT_ENABLE_UFFD_GC := true
 # Adreno
 TARGET_ADRENO_SKIP_VENDOR_BLOBS := true
 
+# Init
+TARGET_INIT_SKIP_VENDOR_SCRIPTS := true
+
 # Audio
 $(call soong_config_set_bool,android_hardware_audio,skip_speaker_layout_channel_mask_field,true)
 
