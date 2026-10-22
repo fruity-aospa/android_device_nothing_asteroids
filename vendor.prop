@@ -51,7 +51,6 @@ ro.camera.enableCamera1MaxZsl=1
 ro.camera.disableHeicUltraHDR=true
 
 # Display
-debug.renderengine.backend=skiaglthreaded
 persist.sys.display_refresh_rates_list=60,120
 vendor.display.comp_mask=0
 vendor.display.disable_3d_adaptive_tm=1
