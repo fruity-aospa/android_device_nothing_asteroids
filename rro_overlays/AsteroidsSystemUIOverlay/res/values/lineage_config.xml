@@ -1,12 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     SPDX-FileCopyrightText: 2025 The LineageOS Project
+     SPDX-FileCopyrightText: 2025-2026 The LineageOS Project
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources>
     <!-- Doze: does the single tap sensor need a proximity check? -->
     <bool name="doze_single_tap_proximity_check">true</bool>
+    <bool name="doze_single_tap_uses_prox">true</bool>
+
+    <!-- Doze: does the double tap sensor need a proximity check? -->
+    <bool name="doze_double_tap_proximity_check">true</bool>
 
     <!-- Doze: does the long press sensor need a proximity check? -->
     <bool name="doze_long_press_proximity_check">true</bool>
+    <bool name="doze_long_press_uses_prox">true</bool>
+
+    <!-- Proximity sensor support for doze triggers -->
+    <bool name="doze_proximity_sensor_supported">true</bool>
+    <bool name="doze_proximity_check_before_pulse">true</bool>
+
+    <!-- Posture mappings to ensure proximity check is used across all postures -->
+    <array name="doze_single_tap_uses_prox_posture_mapping">
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+    </array>
 </resources>
