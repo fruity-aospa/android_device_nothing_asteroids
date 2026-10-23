@@ -6,6 +6,9 @@
 $(call inherit-product, hardware/qcom-caf/common/common.mk)
 $(call inherit-product, vendor/nothing/asteroids/asteroids-vendor.mk)
 
+# Dolby (optional)
+$(call inherit-product-if-exists, hardware/dolby/dolby.mk)
+
 # A/B
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/vabc_features.mk)
 
@@ -164,8 +167,10 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.display.composer-service \
     vendor.qti.hardware.display.demura-service
 
-# Doze
+# Device Extras, Assist Key & Doze
 PRODUCT_PACKAGES += \
+    AssistKey \
+    DeviceExtras \
     NothingDoze
 
 # eUICC
@@ -263,7 +268,6 @@ $(call soong_config_set,lineage_health,charging_control_charging_path,/proc/char
 PRODUCT_PACKAGES += \
     vendor.lineage.health-service.default
 
-# LiveDisplay
 $(call soong_config_set_bool,livedisplay_sdm,enable_dm,false)
 
 PRODUCT_PACKAGES += \
