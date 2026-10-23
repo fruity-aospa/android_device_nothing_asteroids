@@ -293,6 +293,12 @@
     <!-- Type of the tap sensor. Empty if tap is not supported. -->
     <string name="config_dozeTapSensorType" translatable="false">org.lineageos.sensor.single_tap</string>
 
+    <!-- Enable Tap to Wake in Ambient Display / Doze -->
+    <bool name="config_dozeTapGestureEnabled">true</bool>
+
+    <!-- Enable Native Kernel Key Wakeup (KEY_WAKEUP from focaltech_fts) -->
+    <bool name="config_supportDoubleTapWake">true</bool>
+
     <!-- Type of the udfps long press sensor. Empty if long press is not supported. -->
     <string name="config_dozeUdfpsLongPressSensorType" translatable="false">org.lineageos.sensor.udfps</string>
 
@@ -381,6 +387,12 @@
          Refer to autosuspend.h for details.
     -->
     <bool name="config_powerDecoupleAutoSuspendModeFromDisplay">true</bool>
+
+    <!-- Key code emitted by the touchscreen on double tap (KEY_WAKEUP) -->
+    <integer name="config_doubleTapKeyCode">143</integer>
+
+    <!-- Double tap action default: 1 - Wake device -->
+    <integer name="config_doubleTapDefault">1</integer>
 
 
     <!-- Default value for fp screen off unlock toggle, it only works for the devices that support
