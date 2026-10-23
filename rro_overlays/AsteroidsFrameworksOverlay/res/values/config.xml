@@ -382,6 +382,12 @@
     -->
     <bool name="config_powerDecoupleAutoSuspendModeFromDisplay">true</bool>
 
+    <!-- Key code emitted by the touchscreen on double tap (KEY_WAKEUP) -->
+    <integer name="config_doubleTapKeyCode">143</integer>
+
+    <!-- Double tap action default: 1 - Wake device -->
+    <integer name="config_doubleTapDefault">1</integer>
+
 
     <!-- Default value for fp screen off unlock toggle, it only works for the devices that support
          fp screen off unlock-->
