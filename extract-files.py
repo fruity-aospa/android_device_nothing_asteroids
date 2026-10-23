@@ -83,8 +83,6 @@ lib_fixups: lib_fixups_user_type = {
 }
 
 blob_fixups: blob_fixups_user_type = {
-    'vendor/bin/hw/android.hardware.biometrics.face-service.noth': blob_fixup()
-        .replace_needed('libcamera2ndk_vendor.so', 'libcamera2ndk_vendor-v34.so'),
     'vendor/bin/init.qti.kernel.sh': blob_fixup()
         .regex_replace(r'(?m)^start_msm_irqbalance\n', ''),
     (
@@ -101,19 +99,6 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib64/libqcc_sdk.so',
     ): blob_fixup()
         .add_needed('libbinder_shim.so'),
-    'vendor/lib64/libstfaceunlockppl.so': blob_fixup()
-        .sig_replace(
-            'fd 7b bd a9 fd 03 00 91 f3 53 01 a9 f4 03 00 aa f3 03 01 aa c0 0b 02 d0',
-            '00 00 80 52 c0 03 5f d6 1f 20 03 d5 1f 20 03 d5 1f 20 03 d5 1f 20 03 d5',
-        )
-        .sig_replace(
-            'fd 7b bb a9 fd 03 00 91 f3 53 01 a9 a0 17 00 f9 63 c3 ff 97 a1 17 40 f9',
-            '00 00 80 52 c0 03 5f d6 1f 20 03 d5 1f 20 03 d5 1f 20 03 d5 1f 20 03 d5',
-        )
-        .sig_replace(
-            '81 15 02 d0 21 00 71 39 01 00 00 b9 00 00 80 52 c0 03 5f d6',
-            '21 00 80 52 01 00 00 b9 00 00 80 52 c0 03 5f d6 1f 20 03 d5',
-        ),
     'vendor/etc/lvacfs_params/1mic/LVACFS_Configuration.txt': blob_fixup()
         .patch_file('audio/lvacfs_1mic_config.patch'),
     'vendor/etc/lvacfs_params/2mic/LVACFS_Configuration.txt': blob_fixup()
