@@ -245,6 +245,13 @@ PRODUCT_PACKAGES += \
     system_dlkm_modprobe.sh \
     ueventd.asteroids.rc
 
+# device/qcom/common ships volcano post_boot stubs that never leave the boot
+# performance governor. Copy entries here come before the inherited ones, so
+# the stock scripts win the duplicate destination.
+PRODUCT_COPY_FILES += \
+    vendor/nothing/asteroids/proprietary/vendor/bin/init.kernel.post_boot.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.kernel.post_boot.sh \
+    vendor/nothing/asteroids/proprietary/vendor/bin/init.kernel.post_boot-volcano.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.kernel.post_boot-volcano.sh
+
 # Kernel
  PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/system_dlkm.modules.blocklist:$(TARGET_COPY_OUT_VENDOR_DLKM)/lib/modules/system_dlkm.modules.blocklist
