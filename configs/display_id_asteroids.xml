@@ -50,8 +50,8 @@
             <nits>500.0</nits>
         </point>
         <point>
-            <value>0.84074</value>
-            <nits>700.0</nits>
+            <value>0.840537</value>
+            <nits>800.0</nits>
         </point>
         <point>
             <value>1.0</value>
@@ -113,4 +113,36 @@
             </point>
         </sdrHdrRatioMap>
     </highBrightnessMode>
+
+    <thermalThrottling>
+        <throttlingMap>
+            <map>
+                <thermalStatus>light</thermalStatus>
+                <brightness>0.92000</brightness>
+            </map>
+            <map>
+                <thermalStatus>moderate</thermalStatus>
+                <brightness>0.840537</brightness>
+            </map>
+            <map>
+                <thermalStatus>severe</thermalStatus>
+                <brightness>0.719414</brightness>
+            </map>
+            <map>
+                <thermalStatus>critical</thermalStatus>
+                <brightness>0.571429</brightness>
+            </map>
+            <map>
+                <thermalStatus>emergency</thermalStatus>
+                <brightness>0.345055</brightness>
+            </map>
+        </throttlingMap>
+    </thermalThrottling>
+
+    <screenBrightnessRampFastDecrease>0.06</screenBrightnessRampFastDecrease>
+    <screenBrightnessRampFastIncrease>0.04</screenBrightnessRampFastIncrease>
+    <screenBrightnessRampSlowDecrease>0.04</screenBrightnessRampSlowDecrease>
+    <screenBrightnessRampSlowIncrease>0.02</screenBrightnessRampSlowIncrease>
+    <screenBrightnessRampIncreaseMaxMillis>4000</screenBrightnessRampIncreaseMaxMillis>
+    <screenBrightnessRampDecreaseMaxMillis>3000</screenBrightnessRampDecreaseMaxMillis>
 </displayConfiguration>
