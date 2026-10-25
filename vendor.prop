@@ -55,7 +55,6 @@ persist.sys.display_refresh_rates_list=60,120
 vendor.display.comp_mask=0
 vendor.display.disable_3d_adaptive_tm=1
 vendor.display.disable_cwb_idle_fallback=1
-vendor.display.disable_dynamic_fps=1
 vendor.display.disable_excl_rect=0
 vendor.display.disable_excl_rect_partial_fb=1
 vendor.display.disable_hw_recovery_dump=1
@@ -168,10 +167,6 @@ telephony.active_modems.max_count=2
 
 # QMS
 persist.vendor.data.qms.stx_disable=true
-
-# USB
-sys.usb.mtp.batchcancel=1
-vendor.usb.qdss.inst.name=qdss_sw
 
 # Vibrator
 vendor.vibrator.device=/dev/aac_richtap
