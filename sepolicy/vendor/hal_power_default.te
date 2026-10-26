@@ -18,4 +18,5 @@ hal_client_domain(hal_power_default, hal_graphics_composer)
 
 # Allow the AOSPA power feature service to toggle double tap to wake
 allow hal_power_default vendor_proc_display:dir search;
-allow hal_power_default vendor_proc_touchpanel_gesture:file w_file_perms;
+allow hal_power_default vendor_proc_touchpanel_gesture:file rw_file_perms;
+allow hal_power_default vendor_sysfs_touch:file rw_file_perms;
