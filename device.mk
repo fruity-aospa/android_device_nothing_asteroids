@@ -455,6 +455,8 @@ PRODUCT_SOONG_NAMESPACES += \
     hardware/lineage/interfaces/power-libperfmgr \
     hardware/qcom-caf/common/libqti-perfd-client \
     kernel/nothing/sm7635 \
+    hardware/qcom-caf/sm8650 \
+    hardware/qcom-caf/sm8650/audio/st-hal-ar \
     packages/apps/ParanoidGlyph \
     packages/apps/GlyphAdapter
 
