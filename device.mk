@@ -177,13 +177,21 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/display_id_asteroids.xml:$(TARGET_COPY_OUT_VENDOR)/etc/displayconfig/display_id_4630946978939328130.xml
 
 PRODUCT_PACKAGES += \
-    android.hardware.graphics.mapper@4.0-impl-qti-display \
-    init.qti.display_boot.rc \
-    init.qti.display_boot.sh \
-    vendor.qti.hardware.display.allocator-service \
-    vendor.qti.hardware.display.composer-service \
+    android.hardware.graphics.composer3-V2-ndk.vendor \
+    vendor.qti.hardware.display.composer-service.rc \
     vendor.qti.hardware.display.composer-service.xml \
-    vendor.qti.hardware.display.demura-service
+    vendor.qti.hardware.display.composer3-V1-ndk.vendor \
+    vendor.qti.hardware.display.config-V1-ndk.vendor \
+    vendor.qti.hardware.display.config-V2-ndk.vendor \
+    vendor.qti.hardware.display.config-V3-ndk.vendor \
+    vendor.qti.hardware.display.config-V4-ndk.vendor \
+    vendor.qti.hardware.display.config-V5-ndk.vendor \
+    vendor.qti.hardware.display.config-V6-ndk.vendor \
+    vendor.qti.hardware.display.config-V7-ndk.vendor \
+    vendor.qti.hardware.display.config-V8-ndk.vendor \
+    vendor.qti.hardware.display.config-V9-ndk.vendor \
+    vendor.qti.hardware.display.config-V10-ndk.vendor \
+    vendor.qti.hardware.display.config-V11-ndk.vendor
 
 # Device Extras, Assist Key & Doze
 PRODUCT_PACKAGES += \
