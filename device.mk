@@ -161,6 +161,9 @@ PRODUCT_PACKAGES += \
 $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 
 # Data
+PRODUCT_SOONG_NAMESPACES += \
+    hardware/qcom-caf/sm8650/data-ipa-cfg-mgr
+
 PRODUCT_PACKAGES += \
     IPACM_Filter_cfg.xml \
     IPACM_cfg.xml \
@@ -449,6 +452,11 @@ PRODUCT_SOONG_NAMESPACES += \
 PRODUCT_CHARACTERISTICS := nosdcard
 
 # Telephony
+# Only the QSSI half of the QTI telephony component: its vendor half also
+# exports vendor/qcom/opensource/data-ipa-cfg-mgr, which clashes with the
+# sm8650 IPACM above.
+$(call inherit-product, device/qcom/common/system/telephony/qti-telephony.mk)
+
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.cdma.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.cdma.xml \
     frameworks/native/data/etc/android.hardware.telephony.gsm.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.gsm.xml \
