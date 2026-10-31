@@ -1,11 +1,6 @@
 # Bluetooth
 persist.vendor.bt.                     u:object_r:vendor_bluetooth_prop:s0
 
-# Face
-persist.vendor.debug.face_aidl     u:object_r:vendor_face_config_prop:s0
-persist.vendor.face.               u:object_r:vendor_face_config_prop:s0
-vendor.face                        u:object_r:vendor_face_config_prop:s0
-
 # Fingerprint
 persist.vendor.overlay.fp_model     u:object_r:vendor_fingerprint_prop:s0
 persist.vendor.overlay.fp_vendor    u:object_r:vendor_fingerprint_prop:s0
