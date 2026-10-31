@@ -2,12 +2,6 @@
 ro.virtual_ab.compression.threads=true
 ro.virtual_ab.merge_delay_seconds=40
 
-# Adreno
-graphics.gpu.profiler.support=true
-ro.hardware.egl=adreno
-ro.hardware.vulkan=adreno
-ro.opengles.version=196610
-
 # Audio
 aaudio.hw_burst_min_usec=2000
 aaudio.mmap_exclusive_policy=2
@@ -179,18 +173,6 @@ telephony.active_modems.max_count=2
 
 # QMS
 persist.vendor.data.qms.stx_disable=true
-
-# USB
-sys.usb.mtp.batchcancel=1
-vendor.usb.controller=a600000.dwc3
-vendor.usb.diag.func.name=ffs
-vendor.usb.dpl.inst.name=dpl
-vendor.usb.qdss.inst.name=qdss_sw
-vendor.usb.rmnet.func.name=gsi
-vendor.usb.rmnet.inst.name=rmnet
-vendor.usb.rndis.func.name=gsi
-vendor.usb.use_ffs_mtp=1
-vendor.usb.use_gadget_hal=1
 
 # Vibrator
 vendor.vibrator.device=/dev/aac_richtap
