@@ -280,18 +280,11 @@ $(call soong_config_set,nothing_glyph,device,phone3a)
 PRODUCT_PACKAGES += \
     android.hardware.lights-service.glyph
 
-# Lineage Health & LiveDisplay
-ifeq ($(PRODUCT_NAME),lineage_asteroids)
+# Health extension
 $(call soong_config_set,lineage_health,charging_control_charging_path,/proc/charger/usb_charger_en)
 
 PRODUCT_PACKAGES += \
     vendor.lineage.health-service.default
-
-$(call soong_config_set_bool,livedisplay_sdm,enable_dm,false)
-
-PRODUCT_PACKAGES += \
-    vendor.lineage.livedisplay-service.sdm
-endif
 
 # Media
 PRODUCT_COPY_FILES += \
@@ -330,21 +323,17 @@ PRODUCT_PACKAGES += \
     android.hardware.nfc-service.st
 
 # Overlays
-ifeq ($(PRODUCT_NAME),lineage_asteroids)
 DEVICE_PACKAGE_OVERLAYS += \
-    $(LOCAL_PATH)/overlay-lineage
-endif
+    $(LOCAL_PATH)/overlay
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rro_overlays/partition_order.xml:$(TARGET_COPY_OUT_PRODUCT)/overlay/partition_order.xml
 
 PRODUCT_ENFORCE_RRO_TARGETS := *
 
-ifeq ($(PRODUCT_NAME),lineage_asteroids)
 PRODUCT_PACKAGES += \
     AsteroidsApertureDevOverlay \
     AsteroidsApertureOverlay
-endif
 
 PRODUCT_PACKAGES += \
     AsteroidsFrameworksOverlay \
