@@ -91,12 +91,16 @@ on property:vendor.all.modules.ready=1
 
     start asteroids_nfc_detect
 
+    write /sys/devices/platform/soc/ac0000.qcom,qupv3_0_geni_se/a80000.spi/spi_master/spi0/spi0.0/fts_gesture_mode 1
+    write /sys/devices/platform/soc/ac0000.qcom,qupv3_0_geni_se/a80000.spi/spi_master/spi0/spi0.0/fts_gesture_single_tap_enabled 1
+    write /proc/touchpanel/gesture_mode 1
+
 on property:sys.boot_completed=1 && property:persist.sys.sltntc.enable=0
 	stop sltntc
 
 on property:sys.boot_completed=1 && property:persist.sys.sltntc.enable=1
 	start sltntc
-    
+
 on property:vendor.nfc.config_file_name=*
     setprop persist.vendor.nfc.config_file_name ${vendor.nfc.config_file_name}
 

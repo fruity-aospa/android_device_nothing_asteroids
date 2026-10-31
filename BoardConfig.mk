@@ -203,7 +203,11 @@ TARGET_COPY_OUT_VENDOR_DLKM := vendor_dlkm
 BOARD_USES_QCOM_HARDWARE := true
 TARGET_BOARD_PLATFORM := volcano
 
-# Properties 
+# Power
+TARGET_TAP_TO_WAKE_NODE := /proc/touchpanel/gesture_mode
+TARGET_SINGLE_TAP_TO_WAKE_NODE := /sys/devices/platform/soc/ac0000.qcom,qupv3_0_geni_se/a80000.spi/spi_master/spi0/spi0.0/fts_gesture_single_tap_enabled
+
+# Properties
 TARGET_ODM_PROP += $(DEVICE_PATH)/odm.prop
 TARGET_PRODUCT_PROP += $(DEVICE_PATH)/product.prop
 TARGET_SYSTEM_EXT_PROP += $(DEVICE_PATH)/system_ext.prop

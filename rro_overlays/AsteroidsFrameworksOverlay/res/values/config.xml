@@ -290,6 +290,11 @@
     <!-- Type of the tap sensor. Empty if tap is not supported. -->
     <string name="config_dozeTapSensorType" translatable="false">org.lineageos.sensor.single_tap</string>
 
+    <bool name="config_dozeTapGestureEnabled">true</bool>
+    <bool name="config_supportDoubleTapWake">true</bool>
+    <integer name="config_doubleTapKeyCode">143</integer>
+    <integer name="config_doubleTapDefault">1</integer>
+
     <!-- Type of the udfps long press sensor. Empty if long press is not supported. -->
     <string name="config_dozeUdfpsLongPressSensorType" translatable="false">org.lineageos.sensor.udfps</string>
 
