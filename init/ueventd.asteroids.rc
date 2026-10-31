@@ -15,3 +15,6 @@
 # Vibrator
 /dev/aac_richtap   0660   system   system
 /dev/ics_sfdc      0660   system   system
+
+# Display mdss power control
+/sys/devices/platform/soc/9800000.qcom,mdss_mdp power/control 0664 system graphics
