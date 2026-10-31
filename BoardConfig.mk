@@ -175,10 +175,6 @@ TARGET_KERNEL_EXT_MODULES := \
     qcom/opensource/bt-kernel
 
 # Partitions
-ifneq ($(PRODUCT_RO_FILE_SYSTEM), erofs)
--include vendor/lineage/config/BoardConfigReservedSize.mk
-endif
-
 BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST := odm product system system_dlkm system_ext vendor vendor_dlkm
 BOARD_QTI_DYNAMIC_PARTITIONS_SIZE := 9659482112 # BOARD_SUPER_PARTITION_SIZE - 4MiB
 BOARD_SUPER_PARTITION_GROUPS := qti_dynamic_partitions
