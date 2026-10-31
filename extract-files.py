@@ -125,6 +125,15 @@ blob_fixups: blob_fixups_user_type = {
         .add_needed('libui_shim.so'),
     'vendor/lib64/libntcamskia.so': blob_fixup()
         .add_needed('libnativewindow.so'),
+    (
+        'vendor/lib64/libntofflinepostproc.so',
+        'vendor/lib64/vendor.qti.hardware.camera.postproc@1.0-service-impl.so',
+    ): blob_fixup().replace_needed(
+        'vendor.qti.hardware.camera.postproc@1.0.so',
+        'vendor.qti.hardware.camera.postproc@1.0-nothing.so',
+    ),
+    'vendor/lib64/vendor.qti.hardware.camera.postproc@1.0-nothing.so': blob_fixup()
+        .fix_soname(),
     'vendor/lib64/vendor.libdpmframework.so': blob_fixup()
         .add_needed('libbinder_shim.so')
         .add_needed('libhidlbase_shim.so'),
