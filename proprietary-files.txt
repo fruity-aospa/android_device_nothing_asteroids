@@ -921,13 +921,6 @@ vendor/lib64/vendor.qti.hardware.dsp@1.0.so
 # eUICC
 product/priv-app/EuiccGoogle/EuiccGoogle.apk;PRESIGNED
 
-# Face Unlock
-vendor/bin/hw/android.hardware.biometrics.face-service.noth
-vendor/etc/init/android.hardware.biometrics.face-service.noth.rc
-vendor/etc/vintf/manifest/android.hardware.biometrics.face-service.noth.xml
-vendor/lib64/libcamera2ndk_vendor.so:vendor/lib64/libcamera2ndk_vendor-v34.so;FIX_SONAME
-vendor/lib64/libstfaceunlockppl.so
-
 # FASTCRC
 vendor/lib64/libfastcrc.so
 
