@@ -863,6 +863,12 @@ vendor/lib64/libsdmcore.so
 vendor/lib64/libsdmdal.so
 vendor/lib64/libsdmutils.so
 
+# Display (Config)
+vendor/etc/displayconfig/display_id_4630946268659918978.xml
+vendor/etc/displayconfig/display_id_4630946978939328130.xml
+vendor/etc/displayconfig/display_id_4630947039571902850.xml
+vendor/etc/displayconfig/display_id_4630947039571902851.xml
+
 # Display (Features)
 vendor/bin/feature_enabler_client
 vendor/etc/init/feature_enabler_client.rc
