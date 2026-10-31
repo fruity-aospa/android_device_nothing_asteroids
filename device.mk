@@ -259,17 +259,15 @@ PRODUCT_PACKAGES += \
     android.hardware.hardware_keystore_V3.xml
 
 
-# Lineage Health
+PRODUCT_PACKAGES += \
+    android.hardware.lights-service.glyph
+
+# Health extension
 $(call soong_config_set,lineage_health,charging_control_charging_path,/proc/charger/usb_charger_en)
 
 PRODUCT_PACKAGES += \
     vendor.lineage.health-service.default
 
-# LiveDisplay
-$(call soong_config_set_bool,livedisplay_sdm,enable_dm,false)
-
-PRODUCT_PACKAGES += \
-    vendor.lineage.livedisplay-service.sdm
 
 # Media
 PRODUCT_COPY_FILES += \
@@ -316,7 +314,7 @@ PRODUCT_PACKAGES += \
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
-    $(LOCAL_PATH)/overlay-lineage
+    $(LOCAL_PATH)/overlay
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rro_overlays/partition_order.xml:$(TARGET_COPY_OUT_PRODUCT)/overlay/partition_order.xml
@@ -325,8 +323,9 @@ PRODUCT_ENFORCE_RRO_TARGETS := *
 
 PRODUCT_PACKAGES += \
     AsteroidsApertureDevOverlay \
-    AsteroidsApertureOverlay \
-    AsteroidsEuiccOverlay \
+    AsteroidsApertureOverlay
+
+PRODUCT_PACKAGES += \
     AsteroidsFrameworksOverlay \
     AsteroidsMainlineWifiOverlay \
     AsteroidsProMainlineWifiOverlay \
