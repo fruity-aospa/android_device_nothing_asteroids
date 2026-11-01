@@ -33,6 +33,16 @@ def lib_fixup_vendor_suffix(lib: str, partition: str, *args, **kwargs):
 lib_fixups: lib_fixups_user_type = {
     **lib_fixups,
     (
+        'libar-pal',
+        'libar-acdb',
+        'liblx-osal',
+        'libats',
+        'libagm',
+        'libpalclient',
+        'libntcam_session_shim',
+        'libglyph_lights_shim',
+    ): lib_fixup_remove,
+    (
         'com.qualcomm.qti.dpm.api@1.0',
         'com.qualcomm.qti.imscmservice@2.0',
         'com.qualcomm.qti.imscmservice@2.1',
@@ -101,6 +111,16 @@ blob_fixups: blob_fixups_user_type = {
         .add_needed('libbinder_shim.so'),
     'vendor/bin/xtra-daemon': blob_fixup()
         .add_needed('libbinder_shim.so'),
+    (
+        'vendor/etc/seccomp_policy/c2audio.vendor.base-arm64.policy',
+        'vendor/etc/seccomp_policy/codec2.vendor.base-arm64.policy',
+    ): blob_fixup()
+        .regex_replace(r'(?ms)(^munmap: 1\n.*?)^munmap: 1\n', r'\1'),
+    (
+        'vendor/etc/seccomp_policy/c2audio.vendor.ext-arm64.policy',
+        'vendor/etc/seccomp_policy/codec2.vendor.ext-arm64.policy',
+    ): blob_fixup()
+        .regex_replace(r'(?m)^(_llseek|getdents64): 1\n', ''),
     'vendor/etc/lvacfs_params/1mic/LVACFS_Configuration.txt': blob_fixup()
         .patch_file('audio/lvacfs_1mic_config.patch'),
     'vendor/etc/lvacfs_params/2mic/LVACFS_Configuration.txt': blob_fixup()
@@ -111,6 +131,22 @@ blob_fixups: blob_fixups_user_type = {
         .clear_symbol_version('rpcmem_free'),
     'vendor/lib64/libcne.so': blob_fixup()
         .add_needed('libbinder_shim.so'),
+    (
+        'vendor/lib64/libcapiv2uvvendor.so',
+        'vendor/lib64/liblistensoundmodel2vendor.so',
+        'vendor/lib64/libVoiceSdk.so',
+    ): blob_fixup().replace_needed(
+        'libtensorflowlite_c.so',
+        'libtensorflowlite_c_vendor.so',
+    ),
+    'vendor/bin/hw/vendor.qti.camera.provider-service_64': blob_fixup()
+        .add_needed('libntcam_session_shim.so'),
+    'vendor/bin/hw/vendor.qti.hardware.lights.service': blob_fixup()
+        .add_needed('libglyph_lights_shim.so'),
+    'vendor/lib64/camera/node/com.nothing.node.bokehhdr.so': blob_fixup()
+        .binary_regex_replace(b'\xb7\x83\x5d\xf8\x77\xf1\xff\xb4', b'\xb7\x83\x5d\xf8\xb7\xf6\xff\xb4'),
+    'vendor/lib64/hw/libproviderextension.so': blob_fixup()
+        .replace_needed('android.hardware.graphics.allocator-V2-ndk.so', 'android.hardware.graphics.allocator-V1-ndk.so'),
     'vendor/lib64/libmorpho_RapidEffect.so': blob_fixup()
         .clear_symbol_version('AHardwareBuffer_allocate')
         .clear_symbol_version('AHardwareBuffer_describe')

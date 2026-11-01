@@ -51,7 +51,6 @@ rfkill.ko
 rtl8150.ko
 slcan.ko
 slhc.ko
-tipc.ko
 usbnet.ko
 usbserial.ko
 vcan.ko
