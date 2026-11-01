@@ -1,0 +1,1 @@
+allow device_extras vendor_perf_service:service_manager find;
