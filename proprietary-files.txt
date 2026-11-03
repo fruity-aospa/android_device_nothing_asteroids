@@ -873,6 +873,8 @@ vendor/etc/display/qdcm_calib_data_rm69220_amoled_vid_mode_dsi_BOE_panel_with_DS
 vendor/etc/display/qdcm_calib_data_rm69220_amoled_vid_mode_dsi_visionox_panel_with_DSC.json
 vendor/etc/display/thermallevel_to_fps.xml
 vendor/etc/clstc_config_library.xml
+vendor/etc/init/vendor.qti.hardware.lights.service.rc
+vendor/etc/vintf/manifest/vendor.qti.hardware.lights.service.xml
 vendor/lib64/libbacklight-calib.so
 vendor/lib64/libclstc_algorithm_adapter.so
 vendor/lib64/libclstc_gcp_adapter.so
@@ -896,6 +898,8 @@ vendor/lib64/libvmfilexfer.so
 
 # Display postprocessing
 vendor/bin/hw/vendor.qti.hardware.display.color-service
+vendor/bin/hw/vendor.qti.hardware.lights.service;DISABLE_CHECKELF
+vendor/lib64/vendor.hardware.light-V1-ndk_platform.so
 vendor/bin/ppd
 vendor/etc/init/vendor.qti.hardware.display.color-service.rc
 vendor/lib64/libdisp-aba.so

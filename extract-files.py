@@ -37,6 +37,7 @@ lib_fixups: lib_fixups_user_type = {
         'libagm',
         'libpalclient',
         'libntcam_session_shim',
+        'libglyph_lights_shim',
     ): lib_fixup_remove,
     (
         'com.qualcomm.qti.dpm.api@1.0',
@@ -136,6 +137,8 @@ blob_fixups: blob_fixups_user_type = {
     ),
     'vendor/bin/hw/vendor.qti.camera.provider-service_64': blob_fixup()
         .add_needed('libntcam_session_shim.so'),
+    'vendor/bin/hw/vendor.qti.hardware.lights.service': blob_fixup()
+        .add_needed('libglyph_lights_shim.so'),
     'vendor/lib64/camera/node/com.nothing.node.bokehhdr.so': blob_fixup()
         .binary_regex_replace(b'\xb7\x83\x5d\xf8\x77\xf1\xff\xb4', b'\xb7\x83\x5d\xf8\xb7\xf6\xff\xb4'),
     'vendor/lib64/hw/libproviderextension.so': blob_fixup()

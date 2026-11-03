@@ -156,6 +156,10 @@ PRODUCT_COPY_FILES += \
 
 $(call inherit-product-if-exists, hardware/nothing/camera/nothing-camera.mk)
 
+# Glyph lights for Nothing Camera
+PRODUCT_PACKAGES += \
+    libglyph_lights_shim
+
 PRODUCT_PACKAGES += \
     vendor.qti.hardware.display.config-V2-ndk.vendor
 
