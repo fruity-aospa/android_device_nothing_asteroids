@@ -120,6 +120,7 @@ on early-boot
     exec_background u:r:vendor_qti_init_shell_bg:s0 -- /vendor/bin/init.qti.write.sh /sys/devices/virtual/cvp/cvp/boot 1
 
 on boot
+    write /sys/bus/platform/devices/a600000.ssusb/mode peripheral
     write /dev/cpuset/audio-app/cpus 0-1
     # Add a cpuset for the camera daemon
     # We want all cores for camera
