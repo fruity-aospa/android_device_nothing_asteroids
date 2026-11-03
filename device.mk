@@ -163,7 +163,8 @@ PRODUCT_PACKAGES += \
 
 # Data
 PRODUCT_SOONG_NAMESPACES += \
-    hardware/qcom-caf/sm8650/data-ipa-cfg-mgr
+    hardware/qcom-caf/sm8650/data-ipa-cfg-mgr \
+    vendor/qcom/opensource/dataservices
 
 PRODUCT_PACKAGES += \
     IPACM_Filter_cfg.xml \
