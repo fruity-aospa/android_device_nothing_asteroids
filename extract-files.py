@@ -30,6 +30,14 @@ def lib_fixup_vendor_suffix(lib: str, partition: str, *args, **kwargs):
 lib_fixups: lib_fixups_user_type = {
     **lib_fixups,
     (
+        'libar-pal',
+        'libar-acdb',
+        'liblx-osal',
+        'libats',
+        'libagm',
+        'libpalclient',
+    ): lib_fixup_remove,
+    (
         'com.qualcomm.qti.dpm.api@1.0',
         'com.qualcomm.qti.imscmservice@2.0',
         'com.qualcomm.qti.imscmservice@2.1',
@@ -107,14 +115,6 @@ blob_fixups: blob_fixups_user_type = {
         .clear_symbol_version('remote_register_buf')
         .clear_symbol_version('rpcmem_alloc')
         .clear_symbol_version('rpcmem_free'),
-    (
-        'vendor/lib64/libcapiv2uvvendor.so',
-        'vendor/lib64/liblistensoundmodel2vendor.so',
-        'vendor/lib64/libVoiceSdk.so',
-    ): blob_fixup().replace_needed(
-        'libtensorflowlite_c.so',
-        'libtensorflowlite_c_vendor.so',
-    ),
     (
         'vendor/lib64/libcapiv2uvvendor.so',
         'vendor/lib64/liblistensoundmodel2vendor.so',
