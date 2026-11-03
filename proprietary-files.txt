@@ -916,6 +916,7 @@ vendor/lib64/vendor.qti.hardware.dpmaidlservice-V1-ndk.so;MODULE_SUFFIX=_vendor
 
 # DSP
 vendor/bin/dspservice
+vendor/etc/init/vendor.qti.hardware.dsp@1.0-service.rc
 vendor/etc/seccomp_policy/vendor.qti.hardware.dsp.policy
 vendor/lib64/vendor.qti.hardware.dsp@1.0.so
 
