@@ -107,6 +107,16 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib64/libqcc_sdk.so',
     ): blob_fixup()
         .add_needed('libbinder_shim.so'),
+    (
+        'vendor/etc/seccomp_policy/c2audio.vendor.base-arm64.policy',
+        'vendor/etc/seccomp_policy/codec2.vendor.base-arm64.policy',
+    ): blob_fixup()
+        .regex_replace(r'(?ms)(^munmap: 1\n.*?)^munmap: 1\n', r'\1'),
+    (
+        'vendor/etc/seccomp_policy/c2audio.vendor.ext-arm64.policy',
+        'vendor/etc/seccomp_policy/codec2.vendor.ext-arm64.policy',
+    ): blob_fixup()
+        .regex_replace(r'(?m)^(_llseek|getdents64): 1\n', ''),
     'vendor/etc/lvacfs_params/1mic/LVACFS_Configuration.txt': blob_fixup()
         .patch_file('audio/lvacfs_1mic_config.patch'),
     'vendor/etc/lvacfs_params/2mic/LVACFS_Configuration.txt': blob_fixup()
