@@ -115,6 +115,14 @@ blob_fixups: blob_fixups_user_type = {
         'libtensorflowlite_c.so',
         'libtensorflowlite_c_vendor.so',
     ),
+    (
+        'vendor/lib64/libcapiv2uvvendor.so',
+        'vendor/lib64/liblistensoundmodel2vendor.so',
+        'vendor/lib64/libVoiceSdk.so',
+    ): blob_fixup().replace_needed(
+        'libtensorflowlite_c.so',
+        'libtensorflowlite_c_vendor.so',
+    ),
     'vendor/lib64/libmorpho_RapidEffect.so': blob_fixup()
         .clear_symbol_version('AHardwareBuffer_allocate')
         .clear_symbol_version('AHardwareBuffer_describe')

@@ -63,6 +63,12 @@ TARGET_INIT_SKIP_VENDOR_SCRIPTS := true
 
 # Audio
 $(call soong_config_set_bool,android_hardware_audio,skip_speaker_layout_channel_mask_field,true)
+$(call soong_config_set,qtiaudio,feature_agm_hidl,true)
+$(call soong_config_set,qtiaudio,feature_disabled_dts_eagle,true)
+$(call soong_config_set,qtiaudio,feature_gef_support,true)
+$(call soong_config_set,qtiaudio,feature_instance_id,true)
+$(call soong_config_set,qtiaudio,feature_mcs,true)
+$(call soong_config_set,qtiaudio,feature_pal_hidl,true)
 
 AUDIO_HAL_DIR := hardware/qcom-caf/sm8650/audio/primary-hal
 AUDIO_PAL_DIR := hardware/qcom-caf/sm8650/audio/pal
@@ -77,6 +83,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
     $(AUDIO_HAL_DIR)/configs/volcano/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_volcano/audio_effects.conf \
+    $(AUDIO_HAL_DIR)/configs/volcano/mem_logger_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mem_logger_config.xml \
     $(AUDIO_HAL_DIR)/configs/volcano/microphone_characteristics.xml:$(TARGET_COPY_OUT_VENDOR)/etc/microphone_characteristics.xml \
     $(AUDIO_PAL_DIR)/configs/volcano/card-defs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/card-defs.xml
 
