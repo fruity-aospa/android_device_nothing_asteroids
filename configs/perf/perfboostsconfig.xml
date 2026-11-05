@@ -444,6 +444,20 @@
                 Id="0x00001040" Enable="true" Timeout="0" Target="volcano"
                 Resources="0x40000000, 0x0" />
 
+    <!-- ADPF CPU Boost (0x104E / 4174) -->
+        <!-- SCHEDBOOST opcode, value -->
+        <!-- CPUBOOST_MIN_FREQ BIG Core opcode, value (MHz) -->
+        <!-- CPUBOOST_MIN_FREQ LITTLE Core opcode, value (MHz) -->
+        <!-- CPUBOOST_MIN_FREQ PRIME Core opcode, value (MHz) -->
+        <!-- WALT_ADAPTIVE_HIGH_FREQ_BIG opcode, value (KHz) -->
+        <!-- WALT_ADAPTIVE_HIGH_FREQ_LITTLE opcode, value (KHz) -->
+        <!-- WALT_ADAPTIVE_HIGH_FREQ_PRIME opcode, value (KHz) -->
+        <Config
+                Id="0x0000104E" Enable="true" Timeout="0" Target="volcano"
+                Resources="0x40C00000, 0x1,
+                           0x40800000, 1401, 0x40800100, 1344, 0x40800200, 1651,
+                           0x4080C000, 1708800, 0x4080C100, 1593600, 0x4080C200, 1766400" />
+
     <!--FPS Update from Framework-->
         <!-- PREDECITIVE_LOAD BIG CORE resource opcode, value -->
         <!-- PREDECITIVE_LOAD LITTLE Core resource opcode, value -->
