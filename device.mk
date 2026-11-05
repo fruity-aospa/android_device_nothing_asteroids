@@ -176,15 +176,10 @@ PRODUCT_PACKAGES += \
 
 # Data
 PRODUCT_SOONG_NAMESPACES += \
-    hardware/qcom-caf/sm8650/data-ipa-cfg-mgr \
     vendor/qcom/opensource/dataservices
 
 PRODUCT_PACKAGES += \
-    IPACM_Filter_cfg.xml \
-    IPACM_cfg.xml \
-    ipacm \
-    librmnetctl \
-    android.hardware.tetheroffload-V1-ndk
+    librmnetctl
 
 # Display HAL packages (composer, allocator, demura, mapper impl, SDM libs,
 # display_boot init scripts) are provided by hardware/qcom/display via
