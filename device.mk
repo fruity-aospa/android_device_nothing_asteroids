@@ -70,7 +70,7 @@ $(call soong_config_set,qtiaudio,feature_instance_id,true)
 $(call soong_config_set,qtiaudio,feature_mcs,true)
 $(call soong_config_set,qtiaudio,feature_pal_hidl,true)
 
-AUDIO_HAL_DIR := hardware/qcom-caf/sm8650/audio/primary-hal
+AUDIO_HAL_DIR := hardware/qcom/audio
 AUDIO_PAL_DIR := hardware/qcom-caf/sm8650/audio/pal
 
 PRODUCT_COPY_FILES += \
@@ -449,6 +449,7 @@ PRODUCT_SOONG_NAMESPACES += \
     hardware/qcom/wlan/qcwcn/wpa_supplicant_8_lib \
     kernel/nothing/sm7635 \
     hardware/qcom/display \
+    hardware/qcom/audio \
     hardware/qcom-caf/sm8650 \
     hardware/qcom-caf/sm8650/audio/st-hal-ar
 
