@@ -94,14 +94,6 @@
         <item>7</item>
     </integer-array>
 
-    <!-- Messages that should not be shown to the user during face authentication, on keyguard.
-         This includes both lockscreen and bouncer. This should be used to hide messages that may be
-         too chatty or messages that the user can't do much about. Entries are defined in
-         android.hardware.biometrics.face@1.0 types.hal -->
-    <integer-array name="config_face_acquire_keyguard_ignorelist">
-        <item>11</item>
-    </integer-array>
-
     <!-- Default files to pin via Pinner Service -->
     <string-array translatable="false" name="config_defaultPinnerServiceFiles">
         <item>/apex/com.android.art/javalib/core-oj.jar</item>
