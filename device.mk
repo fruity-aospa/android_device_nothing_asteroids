@@ -448,6 +448,7 @@ PRODUCT_SOONG_NAMESPACES += \
     hardware/qcom/wlan/qcwcn/wpa_supplicant_8_lib \
     kernel/nothing/sm7635 \
     hardware/qcom/display \
+    hardware/qcom-caf/sm8650 \
     hardware/qcom-caf/sm8650/audio/st-hal-ar
 
 # Storage
