@@ -1,1 +1,4 @@
 # Empty - service contexts provided by device/qcom/sepolicy_vndr
+
+# Duck RKP
+vendor.evo.duckrkp.IDuckRkp/default    u:object_r:hal_duck_rkp_service:s0

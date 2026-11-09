@@ -240,6 +240,7 @@ SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/private
 
 # VINTF
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
+    $(DEVICE_PATH)/duck-rkp/compatibility_matrix.xml \
     $(DEVICE_PATH)/vintf/framework_matrix_nothing.xml
 DEVICE_MATRIX_FILE := device/qcom/vendor-common/compatibility_matrix.xml
 

@@ -166,6 +166,7 @@ PRODUCT_PACKAGES += \
 
 # DRM
 PRODUCT_PACKAGES += \
+    duck_rkp \
     android.hardware.drm-service.clearkey
 
 # Dalvik

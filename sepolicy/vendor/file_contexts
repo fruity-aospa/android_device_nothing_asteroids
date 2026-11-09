@@ -50,3 +50,6 @@
 
 # Vibrator
 /dev/aac_richtap                                                           u:object_r:aac_richtap_device:s0
+
+# Duck RKP
+/vendor/bin/duck_rkp    u:object_r:duck_rkp_exec:s0
