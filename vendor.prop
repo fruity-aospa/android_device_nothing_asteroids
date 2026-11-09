@@ -91,11 +91,13 @@ ro.vendor.fingerprint.sensor_location=540|2176|92
 
 # Graphics
 debug.angle.feature_overrides_enabled=preferLinearFilterForYUV:mapUnspecifiedColorSpaceToPassThrough
+debug.hwui.target_cpu_time_percent=75
 debug.hwui.use_hint_manager=true
 debug.sf.defer_refresh_rate_when_off=1
 debug.sf.enable_adpf_cpu_hint=true
 debug.sf.frame_rate_multiple_threshold=120
 persist.sys.sf.native_mode=2
+ro.surface_flinger.enable_frame_rate_override=true
 ro.surface_flinger.force_hwc_copy_for_virtual_displays=true
 ro.surface_flinger.game_default_frame_rate_override=60
 ro.surface_flinger.has_HDR_display=true
@@ -112,6 +114,9 @@ ro.surface_flinger.wcg_composition_dataspace=143261696
 
 # Incremental FS
 ro.incremental.enable=yes
+
+# Input
+ro.input.resampling=1
 
 # Keymint
 ro.crypto.metadata_init_delete_all_keys.enabled=true
