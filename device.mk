@@ -5,7 +5,7 @@
 
 # Platform
 TARGET_BOARD_PLATFORM := volcano
-TARGET_KERNEL_VERSION := 6.6
+TARGET_KERNEL_VERSION := 6.1
 TARGET_USES_KERNEL_PLATFORM := false
 
 # QTI components
@@ -243,6 +243,7 @@ PRODUCT_PACKAGES += \
     init.asteroids.nfc.sh \
     init.asteroids.rc \
     init.qcom.recovery.rc \
+    init.qti.write.sh \
     init.target.rc \
     system_dlkm_modprobe.sh \
     ueventd.asteroids.rc
