@@ -444,19 +444,10 @@
                 Id="0x00001040" Enable="true" Timeout="0" Target="volcano"
                 Resources="0x40000000, 0x0" />
 
-    <!-- ADPF CPU Boost (0x104E / 4174) -->
-        <!-- SCHEDBOOST opcode, value -->
-        <!-- CPUBOOST_MIN_FREQ BIG Core opcode, value (MHz) -->
-        <!-- CPUBOOST_MIN_FREQ LITTLE Core opcode, value (MHz) -->
-        <!-- CPUBOOST_MIN_FREQ PRIME Core opcode, value (MHz) -->
-        <!-- WALT_ADAPTIVE_HIGH_FREQ_BIG opcode, value (KHz) -->
-        <!-- WALT_ADAPTIVE_HIGH_FREQ_LITTLE opcode, value (KHz) -->
-        <!-- WALT_ADAPTIVE_HIGH_FREQ_PRIME opcode, value (KHz) -->
+    <!-- AIDL interaction boost: stock base-scroll CPU and DDR floors, bounded to 120ms. -->
         <Config
-                Id="0x0000104E" Enable="true" Timeout="0" Target="volcano"
-                Resources="0x40C00000, 0x1,
-                           0x40800000, 1401, 0x40800100, 1344, 0x40800200, 1651,
-                           0x4080C000, 1708800, 0x4080C100, 1593600, 0x4080C200, 1766400" />
+                Id="0x00001085" Enable="true" Timeout="120" Target="volcano"
+                Resources="0x4303C000, 0xA6428, 0x40800000, 1190, 0x40800100, 1113, 0x40800200, 1094" />
 
     <!--FPS Update from Framework-->
         <!-- PREDECITIVE_LOAD BIG CORE resource opcode, value -->
