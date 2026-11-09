@@ -182,9 +182,17 @@ PRODUCT_SOONG_NAMESPACES += \
 PRODUCT_PACKAGES += \
     librmnetctl
 
-# Display HAL packages (composer, allocator, demura, mapper impl, SDM libs,
-# display_boot init scripts) are provided by hardware/qcom/display via
-# DISPLAY_MODULES_HARDWARE in the QTI display component.
+# Display
+include hardware/qcom-caf/sm8650/display/config/display-modules.mk
+
+PRODUCT_PACKAGES += \
+    $(DISPLAY_MODULES_HARDWARE) \
+    init.qti.display_boot.rc
+
+$(call soong_config_set_bool,qtidisplay,drmpp,true)
+$(call soong_config_set_bool,qtidisplay,gralloc4,true)
+$(call soong_config_set_bool,qtidisplay,default,true)
+$(call soong_config_set_bool,qtidisplay,ubwcp_headers,true)
 
 # Device Extras, Assist Key & Doze
 PRODUCT_PACKAGES += \
@@ -448,7 +456,6 @@ PRODUCT_SOONG_NAMESPACES += \
     hardware/qcom/wlan/qcwcn \
     hardware/qcom/wlan/qcwcn/wpa_supplicant_8_lib \
     kernel/nothing/sm7635 \
-    hardware/qcom/display \
     hardware/qcom/audio \
     hardware/qcom-caf/sm8650 \
     hardware/qcom-caf/sm8650/audio/st-hal-ar
