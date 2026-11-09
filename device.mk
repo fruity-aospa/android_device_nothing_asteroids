@@ -243,7 +243,6 @@ PRODUCT_PACKAGES += \
     init.asteroids.nfc.sh \
     init.asteroids.rc \
     init.qcom.recovery.rc \
-    init.qti.write.sh \
     init.target.rc \
     system_dlkm_modprobe.sh \
     ueventd.asteroids.rc
