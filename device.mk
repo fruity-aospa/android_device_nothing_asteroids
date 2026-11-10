@@ -183,16 +183,8 @@ PRODUCT_PACKAGES += \
     librmnetctl
 
 # Display
-include hardware/qcom-caf/sm8650/display/config/display-modules.mk
-
 PRODUCT_PACKAGES += \
-    $(DISPLAY_MODULES_HARDWARE) \
     init.qti.display_boot.rc
-
-$(call soong_config_set_bool,qtidisplay,drmpp,true)
-$(call soong_config_set_bool,qtidisplay,gralloc4,true)
-$(call soong_config_set_bool,qtidisplay,default,true)
-$(call soong_config_set_bool,qtidisplay,ubwcp_headers,true)
 
 # Device Extras, Assist Key & Doze
 PRODUCT_PACKAGES += \
@@ -343,6 +335,7 @@ PRODUCT_PACKAGES += \
     AsteroidsFrameworksOverlay \
     AsteroidsLauncherOverlay \
     AsteroidsMainlineWifiOverlay \
+    AsteroidsPowerOverlay \
     AsteroidsProMainlineWifiOverlay \
     AsteroidsProSettingsProviderOverlay \
     AsteroidsProWifiOverlay \

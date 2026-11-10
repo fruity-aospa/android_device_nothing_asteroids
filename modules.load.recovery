@@ -108,7 +108,6 @@ led_aw20036.ko
 leds-qti-flash.ko
 leds-qti-tri-led.ko
 llcc-qcom.ko
-llcc_perfmon.ko
 lt9611uxc.ko
 max31760_fan.ko
 mdt_loader.ko

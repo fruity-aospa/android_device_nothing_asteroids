@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 The Paranoid Android Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Override AOSPA's product default so idle power modes cannot defer background delivery. -->
+    <bool name="config_enableAutoPowerModes">false</bool>
+</resources>

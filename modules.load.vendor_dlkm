@@ -91,7 +91,6 @@ led_aw20036.ko
 leds-qti-flash.ko
 leds-qti-tri-led.ko
 llcc-qcom.ko
-llcc_perfmon.ko
 lpass_cdc_dlkm.ko
 lpass_cdc_rx_macro_dlkm.ko
 lpass_cdc_tx_macro_dlkm.ko

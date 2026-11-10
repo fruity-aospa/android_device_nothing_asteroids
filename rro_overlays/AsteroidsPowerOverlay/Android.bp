@@ -1,0 +1,9 @@
+//
+// SPDX-FileCopyrightText: 2026 The Paranoid Android Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+runtime_resource_overlay {
+    name: "AsteroidsPowerOverlay",
+    product_specific: true,
+}

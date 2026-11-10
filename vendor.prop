@@ -94,8 +94,16 @@ debug.angle.feature_overrides_enabled=preferLinearFilterForYUV:mapUnspecifiedCol
 debug.hwui.target_cpu_time_percent=75
 debug.hwui.use_hint_manager=true
 debug.sf.defer_refresh_rate_when_off=1
+debug.sf.early.app.duration=13666666
+debug.sf.early.sf.duration=12333333
+debug.sf.earlyGl.app.duration=13666666
+debug.sf.earlyGl.sf.duration=12333333
 debug.sf.enable_adpf_cpu_hint=true
 debug.sf.frame_rate_multiple_threshold=120
+debug.sf.late.app.duration=13666666
+debug.sf.late.sf.duration=12333333
+# Device timing overrides the common QTI display defaults.
+debug.sf.use_phase_offsets_as_durations=1
 persist.sys.sf.native_mode=2
 ro.surface_flinger.enable_frame_rate_override=true
 ro.surface_flinger.force_hwc_copy_for_virtual_displays=true

@@ -444,6 +444,13 @@
                 Id="0x00001040" Enable="true" Timeout="0" Target="volcano"
                 Resources="0x40000000, 0x0" />
 
+    <!-- ADPF load hints still request this profile independently of per-thread load reports. -->
+        <Config
+                Id="0x0000104E" Enable="true" Timeout="0" Target="volcano"
+                Resources="0x40C00000, 0x1,
+                           0x40800000, 1401, 0x40800100, 1344, 0x40800200, 1651,
+                           0x4080C000, 1708800, 0x4080C100, 1593600, 0x4080C200, 1766400" />
+
     <!-- AIDL interaction boost: stock base-scroll CPU and DDR floors, bounded to 120ms. -->
         <Config
                 Id="0x00001085" Enable="true" Timeout="120" Target="volcano"
