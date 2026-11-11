@@ -5,7 +5,6 @@
 
 package com.nothing;
 
-import android.os.Build;
 import android.os.SystemProperties;
 
 import java.math.BigInteger;
@@ -29,15 +28,10 @@ public class NtFeaturesUtils {
 
     static {
         final String fullProp = SystemProperties.get("ro.vendor.nothing.feature.base", "0");
-        final String productDiffProp = SystemProperties.get("ro.vendor.nothing.feature.diff.product." + Build.PRODUCT, "0");
-        String deviceDiffProp = SystemProperties.get("ro.vendor.nothing.feature.diff.device." + Build.DEVICE, "0");
-        if ("0".equals(deviceDiffProp)) {
-            deviceDiffProp = SystemProperties.get("ro.vendor.nothing.feature.diff.device.Asteroids", "0");
-        }
-        String plusDiffProp = SystemProperties.get("ro.vendor.nothing.feature.diff.plus." + Build.DEVICE, "0");
-        if ("0".equals(plusDiffProp)) {
-            plusDiffProp = SystemProperties.get("ro.vendor.nothing.feature.diff.plus.Asteroids", "0");
-        }
+        // This device's vendor feature keys do not depend on the ROM's product name.
+        final String productDiffProp = SystemProperties.get("ro.vendor.nothing.feature.diff.product.Asteroids", "0");
+        final String deviceDiffProp = SystemProperties.get("ro.vendor.nothing.feature.diff.device.Asteroids", "0");
+        final String plusDiffProp = SystemProperties.get("ro.vendor.nothing.feature.diff.plus.Asteroids", "0");
 
         int bitsetSize = maxLength(replace(fullProp),replace(productDiffProp),replace(deviceDiffProp)) * 4;
 
