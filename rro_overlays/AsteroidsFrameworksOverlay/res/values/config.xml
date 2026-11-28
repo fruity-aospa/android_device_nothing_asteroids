@@ -81,7 +81,27 @@
 
     <!-- Indicate available ColorDisplayManager.COLOR_MODE_xxx. -->
     <integer-array name="config_availableColorModes">
+        <item>3</item> <!-- COLOR_MODE_AUTOMATIC (Adaptive) -->
+        <item>260</item> <!-- Vendor calibration (Alive) -->
+        <item>2</item> <!-- COLOR_MODE_SATURATED -->
+        <item>1</item> <!-- COLOR_MODE_BOOSTED -->
+        <item>0</item> <!-- COLOR_MODE_NATURAL (Standard) -->
+    </integer-array>
+
+    <!-- Let SurfaceFlinger pick the appropriate composition dataspace dynamically
+         (COLOR_MODE_DEFAULT = 0) instead of clamping wide-gamut modes to sRGB. -->
+    <integer-array name="config_displayCompositionColorModes">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
         <item>260</item>
+    </integer-array>
+    <integer-array name="config_displayCompositionColorSpaces">
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
         <item>0</item>
     </integer-array>
 
@@ -142,11 +162,11 @@
         <item>0.55</item>
     </string-array>
 
-    <!-- Boolean indicating whether display white balance is supported. -->
-    <bool name="config_displayWhiteBalanceAvailable">true</bool>
+    <!-- The selected sensors do not provide calibrated ambient color temperature. -->
+    <bool name="config_displayWhiteBalanceAvailable">false</bool>
 
     <!-- Boolean indicating whether display white balance should be enabled by default. -->
-    <bool name="config_displayWhiteBalanceEnabledDefault">true</bool>
+    <bool name="config_displayWhiteBalanceEnabledDefault">false</bool>
 
     <!-- Doze: should the TYPE_PICK_UP_GESTURE sensor be used as a pulse signal. -->
     <bool name="config_dozePulsePickup">true</bool>
@@ -181,9 +201,6 @@
     <!-- Whether to enable fp unlock when screen turns off on udfps devices -->
     <bool name="config_screen_off_udfps_enabled">true</bool>
 
-    <!-- Enable Zram writeback feature to allow unused pages in zram be written to flash. -->
-    <bool name="config_zramWriteback">false</bool>
-
     <!-- Screen brightness used to dim the screen when the user activity
          timeout expires.  May be less than the minimum allowed brightness setting
          that can be set by the user. -->
@@ -216,7 +233,7 @@
          when adapting to brighter or darker environments.  This parameter controls how quickly
          brightness changes occur in response to an observed change in light level that exceeds the
          hysteresis threshold. -->
-    <integer name="config_autoBrightnessBrighteningLightDebounce">2000</integer>
+    <integer name="config_autoBrightnessBrighteningLightDebounce">1000</integer>
     <integer name="config_autoBrightnessDarkeningLightDebounce">4000</integer>
 
     <!-- Timeout (in milliseconds) after which we remove the effects any user interactions might've
@@ -260,30 +277,14 @@
     <!-- Limit for the number of face templates per user -->
     <integer name="config_faceMaxTemplatesPerUser">2</integer>
 
-    <!-- Default color temperature, in Kelvin, to tint the screen when Night display is
-         activated. -->
-    <integer name="config_nightDisplayColorTemperatureDefault">4130</integer>
-
-    <!-- Maximum color temperature, in Kelvin, supported by Night display. -->
-    <integer name="config_nightDisplayColorTemperatureMax">5000</integer>
-
-    <!-- Minimum color temperature, in Kelvin, supported by Night display. -->
-    <integer name="config_nightDisplayColorTemperatureMin">4000</integer>
-
-    <!-- Default strength, in percentage, of bright color reduction when activated. -->
-    <integer name="config_reduceBrightColorsStrengthDefault">25</integer>
-
-    <!-- Maximum strength, in percentage, supported by bright color reduction. -->
-    <integer name="config_reduceBrightColorsStrengthMax">60</integer>
-
-    <!-- Minimum strength, in percentage, supported by bright color reduction. -->
-    <integer name="config_reduceBrightColorsStrengthMin">25</integer>
-
     <!-- Shutdown if the battery temperature exceeds (this value * 0.1) Celsius. -->
     <integer name="config_shutdownBatteryTemperature">600</integer>
 
     <!-- Type of the tap sensor. Empty if tap is not supported. -->
     <string name="config_dozeTapSensorType" translatable="false">org.lineageos.sensor.single_tap</string>
+
+    <bool name="config_dozeTapGestureEnabled">true</bool>
+    <bool name="config_supportDoubleTapWake">true</bool>
 
     <!-- Type of the udfps long press sensor. Empty if long press is not supported. -->
     <string name="config_dozeUdfpsLongPressSensorType" translatable="false">org.lineageos.sensor.udfps</string>
@@ -374,8 +375,9 @@
     -->
     <bool name="config_powerDecoupleAutoSuspendModeFromDisplay">true</bool>
 
-    <!-- Whether device supports double tap to wake -->
-    <bool name="config_supportDoubleTapWake">true</bool>
+    <integer name="config_doubleTapKeyCode">143</integer>
+
+    <integer name="config_doubleTapDefault">1</integer>
 
 
     <!-- Default value for fp screen off unlock toggle, it only works for the devices that support
@@ -387,15 +389,6 @@
          available on some devices. -->
     <bool name="config_enableHapticTextHandle">true</bool>
 
-    <!-- Set this to true to enable the platform's auto-power-save modes like doze and
-         app standby.  These are not enabled by default because they require a standard
-         cloud-to-device messaging service for apps to interact correctly with the modes
-         (such as to be able to deliver an instant message to the device even when it is
-         dozing).  This should be enabled if you have such services and expect apps to
-         correctly use them when installed on your device.  Otherwise, keep this disabled
-         so that applications can still use their own mechanisms. -->
-    <bool name="config_enableAutoPowerModes">true</bool>
-    
     <!-- Flag indicating whether we should enable smart battery. -->
     <bool name="config_smart_battery_available">true</bool>
     
@@ -418,7 +411,7 @@
 
     <!-- Whether low power standby is supported by the device. -->
     <bool name="config_lowPowerStandbySupported">true</bool>
-    <bool name="config_lowPowerStandbyEnabledByDefault">true</bool>
+    <bool name="config_lowPowerStandbyEnabledByDefault">false</bool>
 
     <!-- Flag indicating whether the surface flinger is inefficient at performing a blur. -->
     <bool name="config_sf_slowBlur">false</bool>
@@ -435,13 +428,5 @@
 
      <!-- The amount to scale fullscreen snapshots for Overview and snapshot starting windows. -->
      <item name="config_highResTaskSnapshotScale" format="float" type="dimen">0.7</item>
-
-    <!-- Device key handler libraries and classes -->
-    <string-array name="config_deviceKeyHandlerLibs" translatable="false">
-        <item>/system_ext/priv-app/AssistKey/AssistKey.apk</item>
-    </string-array>
-    <string-array name="config_deviceKeyHandlerClasses" translatable="false">
-        <item>com.nothing.assistkey.KeyHandler</item>
-    </string-array>
 
 </resources>

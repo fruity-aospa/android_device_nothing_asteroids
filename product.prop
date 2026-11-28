@@ -30,6 +30,8 @@ masterclear.allow_retain_esim_profiles_after_fdr=true
 remote_provisioning.enable_rkpd=true
 remote_provisioning.hostname=remoteprovisioning.googleapis.com
 
+# Display
+ro.surface_flinger.enable_sdr_dimming=true
 
 # ZRAM (mmd)
 mmd.zram.enabled=true
