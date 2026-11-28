@@ -5,6 +5,7 @@
 
 # Platform
 TARGET_BOARD_PLATFORM := volcano
+TARGET_KERNEL_VERSION := 6.1
 TARGET_USES_KERNEL_PLATFORM := false
 
 # QTI components
@@ -277,7 +278,7 @@ PRODUCT_PACKAGES += \
     init.target.rc \
     init.veth_ipa_config.sh \
     qca6234-service.sh \
-    system_dlkm_modprobe.sh \
+    system_dlkm_asteroids_modprobe.sh \
     ueventd.asteroids.rc \
     ueventd.qcom.rc \
     vendor_modprobe.sh
@@ -430,9 +431,9 @@ PRODUCT_PACKAGES += \
     android.hardware.secure_element-service.thales
 
 # Security
-BOOT_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
-INIT_BOOT_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
-VENDOR_SECURITY_PATCH := 2026-04-05
+BOOT_SECURITY_PATCH := 2026-04-05
+INIT_BOOT_SECURITY_PATCH := $(BOOT_SECURITY_PATCH)
+VENDOR_SECURITY_PATCH := $(BOOT_SECURITY_PATCH)
 
 # Sensors
 PRODUCT_COPY_FILES += \
