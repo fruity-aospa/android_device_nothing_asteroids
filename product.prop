@@ -29,3 +29,12 @@ masterclear.allow_retain_esim_profiles_after_fdr=true
 # Remote Key Provisioning (RKP)
 remote_provisioning.enable_rkpd=true
 remote_provisioning.hostname=remoteprovisioning.googleapis.com
+
+
+# ZRAM (mmd)
+mmd.zram.enabled=true
+mmd.zram.size=75%
+mmd.zram.comp_algorithm=lz4
+mmd.zram.device_priority=32758
+mmd.zram.writeback.enabled=true
+mmd.zram.writeback.device_size=1073741824
