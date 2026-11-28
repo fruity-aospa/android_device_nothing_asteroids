@@ -5,6 +5,8 @@
 
 DEVICE_PATH := device/nothing/asteroids
 
+BUILD_BROKEN_PREBUILT_ELF_FILES := true
+
 
 include build/make/target/board/BoardConfigMainlineCommon.mk
 include vendor/nothing/asteroids/BoardConfigVendor.mk
