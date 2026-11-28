@@ -3,11 +3,44 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-$(call inherit-product, hardware/qcom-caf/common/common.mk)
+# Platform
+TARGET_BOARD_PLATFORM := volcano
+TARGET_USES_KERNEL_PLATFORM := false
+
+# QTI components
+TARGET_COMMON_QTI_COMPONENTS := \
+    alarm \
+    av \
+    bt \
+    display \
+    perf \
+    usb \
+    wfd
+
+# GPS (device ships prebuilt GNSS HALs; avoid inheriting source HAL packages)
+PRODUCT_SOONG_NAMESPACES += \
+    device/qcom/common/vendor/gps
+
+PRODUCT_PACKAGES += \
+    QCOMGPSFrameworksOverlay \
+    gps.conf \
+    batching.conf \
+    gnss_antenna_info.conf \
+    gnss@2.0-base.policy \
+    gnss@2.0-edgnss-daemon.policy \
+    gnss@2.0-xtra-daemon.policy \
+    gnss@2.0-xtwifi-client.policy
+
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.location.gps.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.location.gps.xml
+
 $(call inherit-product, vendor/nothing/asteroids/asteroids-vendor.mk)
 
 # Dolby (optional)
 $(call inherit-product-if-exists, hardware/dolby/dolby.mk)
+
+# Weather provider for Launcher At a Glance; weather and location remain opt-in.
+PRODUCT_PACKAGES += OmniJaws
 
 # A/B
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/vabc_features.mk)
@@ -38,21 +71,34 @@ PRODUCT_SHIPPING_API_LEVEL := 35
 # ART
 PRODUCT_ENABLE_UFFD_GC := true
 
-# Adreno
+# Adreno (device owns proprietary GPU blobs; include open-source permissions/props only)
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml \
-    frameworks/native/data/etc/android.hardware.vulkan.compute-0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.compute-0.xml \
     frameworks/native/data/etc/android.hardware.vulkan.level-1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.level-1.xml \
     frameworks/native/data/etc/android.hardware.vulkan.version-1_1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version-1_1.xml \
     frameworks/native/data/etc/android.hardware.vulkan.version-1_3.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version-1_3.xml \
+    frameworks/native/data/etc/android.hardware.vulkan.compute-0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.compute-0.xml \
     frameworks/native/data/etc/android.software.opengles.deqp.level-2023-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.opengles.deqp.level.xml \
     frameworks/native/data/etc/android.software.vulkan.deqp.level-2023-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.vulkan.deqp.level.xml
 
+PRODUCT_VENDOR_PROPERTIES += \
+    ro.hardware.egl=adreno \
+    ro.hardware.vulkan=adreno \
+    ro.opengles.version=196610
+
 # Audio
 $(call soong_config_set_bool,android_hardware_audio,skip_speaker_layout_channel_mask_field,true)
+$(call soong_config_set,qtiaudio,headers_namespace,.)
+$(call soong_config_set,qtiaudio,libarpal_namespace,.)
+$(call soong_config_set,qtiaudio,feature_agm_hidl,true)
+$(call soong_config_set,qtiaudio,feature_disabled_dts_eagle,true)
+$(call soong_config_set,qtiaudio,feature_gef_support,true)
+$(call soong_config_set,qtiaudio,feature_instance_id,true)
+$(call soong_config_set,qtiaudio,feature_mcs,true)
+$(call soong_config_set,qtiaudio,feature_pal_hidl,true)
 
-AUDIO_HAL_DIR := hardware/qcom-caf/sm8650/audio/primary-hal
-AUDIO_PAL_DIR := hardware/qcom-caf/sm8650/audio/pal
+AUDIO_HAL_DIR := hardware/qcom/audio
+AUDIO_PAL_DIR := vendor/qcom/opensource/arpal-lx
 
 PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
@@ -64,16 +110,21 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
     $(AUDIO_HAL_DIR)/configs/volcano/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_volcano/audio_effects.conf \
+    $(AUDIO_HAL_DIR)/configs/volcano/mem_logger_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mem_logger_config.xml \
     $(AUDIO_HAL_DIR)/configs/volcano/microphone_characteristics.xml:$(TARGET_COPY_OUT_VENDOR)/etc/microphone_characteristics.xml \
     $(AUDIO_PAL_DIR)/configs/volcano/card-defs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/card-defs.xml
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_volcano/audio_policy_configuration.xml \
+    $(LOCAL_PATH)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
     $(LOCAL_PATH)/audio/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
     $(LOCAL_PATH)/audio/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
     $(LOCAL_PATH)/audio/mixer_paths_volcano_qrd.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_volcano/mixer_paths_volcano_qrd.xml \
+    $(LOCAL_PATH)/audio/mixer_paths_volcano_qrd.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_volcano_qrd.xml \
     $(LOCAL_PATH)/audio/resourcemanager_volcano_qrd.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_volcano/resourcemanager_volcano_qrd.xml \
+    $(LOCAL_PATH)/audio/resourcemanager_volcano_qrd.xml:$(TARGET_COPY_OUT_VENDOR)/etc/resourcemanager_volcano_qrd.xml \
     $(LOCAL_PATH)/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_volcano/audio_effects.xml \
+    $(LOCAL_PATH)/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
     $(LOCAL_PATH)/audio/usecaseKvManager.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usecaseKvManager.xml
 
 PRODUCT_PACKAGES += \
@@ -113,15 +164,9 @@ PRODUCT_PACKAGES += \
 $(call soong_config_set_bool,nothing_fingerprint,use_lhbm,true)
 
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.biometrics.face.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.biometrics.face.xml \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
 
 TARGET_HAS_UDFPS := true
-
-# Bluetooth
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.bluetooth_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth_le.xml \
-    frameworks/native/data/etc/android.hardware.bluetooth.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth.xml
 
 # Boot Control
 PRODUCT_PACKAGES += \
@@ -146,30 +191,9 @@ PRODUCT_PACKAGES += \
 # Dalvik
 $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 
-# Data
+
+# Device Extras & Doze
 PRODUCT_PACKAGES += \
-    IPACM_Filter_cfg.xml \
-    IPACM_cfg.xml \
-    ipacm
-
-# Display
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/display_id_asteroids.xml:$(TARGET_COPY_OUT_VENDOR)/etc/displayconfig/display_id_4630946978939328130.xml
-
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml
-
-PRODUCT_PACKAGES += \
-    android.hardware.graphics.mapper@4.0-impl-qti-display \
-    init.qti.display_boot.rc \
-    init.qti.display_boot.sh \
-    vendor.qti.hardware.display.allocator-service \
-    vendor.qti.hardware.display.composer-service \
-    vendor.qti.hardware.display.demura-service
-
-# Device Extras, Assist Key & Doze
-PRODUCT_PACKAGES += \
-    AssistKey \
     DeviceExtras \
     NothingDoze
 
@@ -199,17 +223,11 @@ PRODUCT_PACKAGES += \
 
 # Glyph
 PRODUCT_PACKAGES += \
+    GlyphAdapter \
     ParanoidGlyph
-
-# GPS
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.location.gps.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.location.gps.xml
 
 # Graphics
 PRODUCT_REQUIRES_INSECURE_EXECMEM_FOR_SWIFTSHADER := true
-
-PRODUCT_PACKAGES += \
-    vulkan.pastel
 
 # HIDL
 PRODUCT_PACKAGES += \
@@ -221,24 +239,48 @@ PRODUCT_PACKAGES += \
     android.hardware.health-service.qti \
     android.hardware.health-service.qti_recovery
 
-# Init
+# Init (import only non-conflicting common QTI init bits; device/vendor own modprobe & post_boot scripts)
+PRODUCT_SOONG_NAMESPACES += \
+    device/qcom/common/vendor/init
+
+PRODUCT_COPY_FILES += \
+    device/qcom/common/vendor/init/init.qcom.early_boot.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.early_boot.sh \
+    device/qcom/common/vendor/init/init.qcom.post_boot.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.post_boot.sh
+
 PRODUCT_PACKAGES += \
     fstab.default \
     fstab.default.vendor_ramdisk \
     fstab.zram.2g \
+    init.aospa.perf.common.rc \
+    init.aospa.perf.common.sh \
     init.asteroids.hw.rc \
     init.asteroids.nfc.sh \
     init.asteroids.rc \
     init.class_main.sh \
-    init.qcom.early_boot.sh \
-    init.qcom.post_boot.sh \
+    init.crda.sh \
+    init.kernel.init_boot-memory.sh \
+    init.mdm.sh \
+    init.qcom.aospa.rc \
+    init.qcom.class_core.sh \
+    init.qcom.coex.sh \
+    init.qcom.efs.sync.sh \
     init.qcom.rc \
     init.qcom.recovery.rc \
+    init.qcom.sdio.sh \
     init.qcom.sh \
+    init.qcrild.sh \
+    init.qti.kernel.rc \
+    init.qti.kernel.sh \
+    init.qti.kernel.target.rc \
+    init.qti.write.sh \
+    init.recovery.qcom.rc \
     init.target.rc \
+    init.veth_ipa_config.sh \
+    qca6234-service.sh \
     system_dlkm_modprobe.sh \
     ueventd.asteroids.rc \
-    ueventd.qcom.rc
+    ueventd.qcom.rc \
+    vendor_modprobe.sh
 
 # Kernel
  PRODUCT_COPY_FILES += \
@@ -257,21 +299,17 @@ PRODUCT_PACKAGES += \
     android.hardware.hardware_keystore_V3.xml
 
 # Lights
+TARGET_EXCLUDES_QTI_LIGHTS := true
 $(call soong_config_set,nothing_glyph,device,phone3a)
 
 PRODUCT_PACKAGES += \
     android.hardware.lights-service.glyph
 
-# Lineage Health
+# Health extension
 $(call soong_config_set,lineage_health,charging_control_charging_path,/proc/charger/usb_charger_en)
 
 PRODUCT_PACKAGES += \
     vendor.lineage.health-service.default
-
-$(call soong_config_set_bool,livedisplay_sdm,enable_dm,false)
-
-PRODUCT_PACKAGES += \
-    vendor.lineage.livedisplay-service.sdm
 
 # Media
 PRODUCT_COPY_FILES += \
@@ -311,7 +349,7 @@ PRODUCT_PACKAGES += \
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
-    $(LOCAL_PATH)/overlay-lineage
+    $(LOCAL_PATH)/overlay
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rro_overlays/partition_order.xml:$(TARGET_COPY_OUT_PRODUCT)/overlay/partition_order.xml
@@ -349,22 +387,14 @@ PRODUCT_PACKAGES += \
 PRODUCT_BUILD_RECOVERY_IMAGE := true
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
-PRODUCT_PACKAGES += \
-    vendor_bt_firmware_mountpoint \
-    vendor_dsp_mountpoint \
-    vendor_firmware_mnt_mountpoint
-
 # Permissions
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/default-permissions-product.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/default-permissions/default-permissions-nothing.xml \
     $(LOCAL_PATH)/configs/default-permissions-system_ext.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/default-permissions/default-permissions-nothing.xml \
     $(LOCAL_PATH)/configs/hidden-api-whitelist-product.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/hidden-api-whitelist-nothing.xml \
     $(LOCAL_PATH)/configs/privapp-permissions-product.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-nothing.xml \
+    $(LOCAL_PATH)/configs/sysconfig_qti.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/sysconfig/sysconfig_qti.xml \
     $(LOCAL_PATH)/configs/sysconfig_wfc.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/sysconfig_wfc.xml
-
-# Power
-PRODUCT_PACKAGES += \
-    android.hardware.power-service-qti
 
 # Project ID Quota
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
@@ -400,9 +430,9 @@ PRODUCT_PACKAGES += \
     android.hardware.secure_element-service.thales
 
 # Security
-BOOT_SECURITY_PATCH := 2026-04-05
-INIT_BOOT_SECURITY_PATCH := $(BOOT_SECURITY_PATCH)
-VENDOR_SECURITY_PATCH := $(BOOT_SECURITY_PATCH)
+BOOT_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
+INIT_BOOT_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
+VENDOR_SECURITY_PATCH := 2026-04-05
 
 # Sensors
 PRODUCT_COPY_FILES += \
@@ -436,12 +466,20 @@ PRODUCT_PACKAGES += \
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
     hardware/nothing \
-    kernel/nothing/sm7635
+    hardware/qcom/wlan/qcwcn \
+    kernel/nothing/sm7635 \
+    hardware/qcom/audio \
+    vendor/qcom/opensource/audio-hal/st-hal-ar
 
 # Storage
 PRODUCT_CHARACTERISTICS := nosdcard
 
 # Telephony
+# Only the QSSI half of the QTI telephony component: its vendor half also
+# exports vendor/qcom/opensource/data-ipa-cfg-mgr, which clashes with the
+# sm8650 IPACM above.
+$(call inherit-product, device/qcom/common/system/telephony/qti-telephony.mk)
+
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.cdma.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.cdma.xml \
     frameworks/native/data/etc/android.hardware.telephony.gsm.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.gsm.xml \
@@ -470,24 +508,19 @@ PRODUCT_PACKAGES += \
     qcrilNrDb_vendor
 
 PRODUCT_BOOT_JARS += \
-    nt-telephony-interface \
-    telephony-ext
+    nt-telephony-interface
 
 # Thermal
 PRODUCT_PACKAGES += \
     android.hardware.thermal-service.qti
 
 # USB
+PRODUCT_HAS_GADGET_HAL := true
+$(call inherit-product, vendor/qcom/opensource/usb/vendor_product.mk)
+
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/native/data/etc/android.hardware.usb.host.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.host.xml
-
-PRODUCT_PACKAGES += \
-    android.hardware.usb-service.qti \
-    android.hardware.usb.gadget-service.qti \
-    init.qcom.usb.rc \
-    init.qcom.usb.sh \
-    usb_compositions.conf
 
 PRODUCT_SOONG_NAMESPACES += \
     vendor/qcom/opensource/usb/etc
