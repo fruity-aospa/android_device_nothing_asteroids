@@ -1,0 +1,2 @@
+type vendor_proc_touchpanel_gesture, fs_type, proc_type;
+type vendor_sysfs_boot_log, fs_type, sysfs_type;

@@ -1,3 +1,6 @@
+# Graphics
+/vendor/lib64/libubwcp\.so                                           u:object_r:same_process_hal_file:s0
+
 # Camera
 /vendor/lib64/camera/components/com\.qti\.stats\.aecxcore\.so       u:object_r:same_process_hal_file:s0
 /vendor/lib64/camera/components/com\.qti\.stats\.afc\.so            u:object_r:same_process_hal_file:s0
@@ -15,17 +18,28 @@
 /vendor/lib64/libnoteengine\.so                                     u:object_r:same_process_hal_file:s0
 /vendor/lib64/libmpbase\.so                                         u:object_r:same_process_hal_file:s0
 
-# Face
-/vendor/bin/hw/android\.hardware\.biometrics\.face-service\.noth    u:object_r:hal_face_default_exec:s0
-
 # Lights
-/dev/led_strips    u:object_r:led_device:s0
+/dev/led_strips                               u:object_r:led_device:s0
+
+# Power HAL
 
 # NFC
 /odm/bin/init\.asteroids\.nfc\.sh                    u:object_r:vendor_qti_init_shell_exec:s0
 /vendor/bin/hw/android\.hardware\.nfc-service\.st    u:object_r:hal_nfc_default_exec:s0
 
 # Partitions
+/dev/block/platform/soc/1d84000\.ufshc/by-name/misc            u:object_r:misc_block_device:s0
+/dev/block/bootdevice/by-name/misc                             u:object_r:misc_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/ssd             u:object_r:vendor_ssd_block_device:s0
+/dev/block/bootdevice/by-name/ssd                              u:object_r:vendor_ssd_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/boot_[ab]       u:object_r:boot_block_device:s0
+/dev/block/bootdevice/by-name/boot_[ab]                        u:object_r:boot_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/recovery_[ab]   u:object_r:recovery_block_device:s0
+/dev/block/bootdevice/by-name/recovery_[ab]                    u:object_r:recovery_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/userdata        u:object_r:userdata_block_device:s0
+/dev/block/bootdevice/by-name/userdata                         u:object_r:userdata_block_device:s0
+/dev/block/platform/soc/1d84000\.ufshc/by-name/metadata        u:object_r:metadata_block_device:s0
+/dev/block/bootdevice/by-name/metadata                         u:object_r:metadata_block_device:s0
 /dev/block/platform/soc/1d84000\.ufshc/by-name/vbmeta_vendor_[ab]    u:object_r:vendor_custom_ab_block_device:s0
 
 # Secure Element
@@ -34,3 +48,6 @@
 
 # Vibrator
 /dev/aac_richtap                                                           u:object_r:aac_richtap_device:s0
+
+# Vendor init scripts
+/(vendor|system/vendor)/bin/system_dlkm_asteroids_modprobe\.sh             u:object_r:vendor_modinstall-sh_exec:s0
