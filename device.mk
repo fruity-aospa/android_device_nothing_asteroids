@@ -522,6 +522,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_BOOT_JARS += \
     nt-telephony-interface
 
+# Nothing-fwk
+PRODUCT_PACKAGES += \
+    nothing-fwk
+
+PRODUCT_BOOT_JARS += \
+    nothing-fwk
+
 # Thermal
 PRODUCT_PACKAGES += \
     android.hardware.thermal-service.qti
