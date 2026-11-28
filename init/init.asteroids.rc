@@ -4,7 +4,7 @@
 #
 
 on fs
-    mkdir /mnt/vendor/persist/camera 0777 cameraserver cameraserver
+    mkdir /mnt/vendor/persist/camera 0770 cameraserver cameraserver
 
 on post-fs-data
     mkdir /data/vendor/camera 0775 camera camera
@@ -18,7 +18,6 @@ on post-fs-data
     chmod 0444 /data/vendor/camera/bokeh_caldata_tele_persist.bin
     chown cameraserver audio /data/vendor/camera/bokeh_caldata_tele_persist.bin
 
-    chmod 0777 /vendor/etc/camera
     copy /vendor/etc/camera/bokeh_caldata_uw_golden.bin /data/vendor/camera/bokeh_caldata_uw_golden.bin
     chmod 0444 /data/vendor/camera/bokeh_caldata_uw_golden.bin
     chown cameraserver audio /data/vendor/camera/bokeh_caldata_uw_golden.bin
@@ -27,8 +26,11 @@ on post-fs-data
     chmod 0444 /data/vendor/camera/bokeh_caldata_tele_golden.bin
     chown cameraserver audio /data/vendor/camera/bokeh_caldata_tele_golden.bin
 
-    symlink /mnt/vendor/persist/sensors/registry/registry/volcano_qrd_ois_manager_0.json.ois_manager_0_platform.ois.fac_cal.bias /data/vendor/camera/ois_gyro_offset
+    # OIS factory gyro bias (Pro only), the camera HAL can't read the 0600 original
+    rm /data/vendor/camera/ois_gyro_offset
+    copy /mnt/vendor/persist/sensors/registry/registry/volcano_qrd_ois_manager_0.json.ois_manager_0_platform.ois.fac_cal.bias /data/vendor/camera/ois_gyro_offset
     chown cameraserver audio /data/vendor/camera/ois_gyro_offset
+    chmod 0664 /data/vendor/camera/ois_gyro_offset
 
     setprop ro.media.xml_variant.profiles "_volcano_v1_${ro.boot.pbid}"
 
@@ -42,6 +44,20 @@ on early-boot
     chown system system /sys/devices/platform/soc/8c0000.qcom,qupv3_1_geni_se/880000.i2c/i2c-7/7-003a/leds/aw20036_led/frame_brightness
 
 on boot
+    # Notification LEDs
+    chown system system /sys/class/leds/red/brightness
+    chown system system /sys/class/leds/green/brightness
+    chown system system /sys/class/leds/blue/brightness
+    chmod 0666 /sys/class/leds/red/brightness
+    chmod 0666 /sys/class/leds/green/brightness
+    chmod 0666 /sys/class/leds/blue/brightness
+    chown system system /sys/class/leds/red/trigger
+    chown system system /sys/class/leds/green/trigger
+    chown system system /sys/class/leds/blue/trigger
+
+    # Display panel backlight baseline to avoid 0.1 nits pitch black cold boot
+    write /sys/class/backlight/panel0-backlight/brightness 200
+
     chown system system /sys/devices/platform/soc/8c0000.qcom,qupv3_1_geni_se/880000.i2c/i2c-7/7-003a/leds/aw20036_led/factory_test
     chown system system /sys/devices/platform/soc/8c0000.qcom,qupv3_1_geni_se/880000.i2c/i2c-7/7-003a/leds/aw20036_led/imax
     chown system system /sys/devices/platform/soc/8c0000.qcom,qupv3_1_geni_se/880000.i2c/i2c-7/7-003a/leds/aw20036_led/effect
@@ -69,7 +85,7 @@ on boot
     chown system system /mnt/vendor/persist/color
     chmod 444 /mnt/vendor/persist/color
 
-    mkdir data/vendor/fpdump 0777 system system
+    mkdir /data/vendor/fpdump 0770 system system
     restorecon /data/vendor/fpdump
 
     chmod 0660 /proc/touchpanel/TP_charger_flags
@@ -78,10 +94,9 @@ on boot
     chown system system /proc/touchpanel/pocket_mode
 
 on property:sys.boot_completed=1
-    swapon_all /odm/etc/fstab.zram.2g
-
-    write /dev/cpuset/background/cpus 0-2
-    write /dev/cpuset/system-background/cpus 0-5
+    # Stop the kernel boot recorder after its final log flush.
+    wait /sys/devices/virtual/NT/NT_reserve_kernel_log/boot_stage_systemserver
+    write /sys/devices/virtual/NT/NT_reserve_kernel_log/boot_stage_systemserver 1
 
     chown system system /proc/charger/nt_otg_enable
     chmod 0664 /proc/charger/nt_otg_enable
@@ -95,6 +110,9 @@ on property:vendor.all.modules.ready=1
 
     start asteroids_nfc_detect
 
+    # Double tap is owned by PowerManagerService, single tap by the sensors HAL.
+    write /sys/devices/platform/soc/ac0000.qcom,qupv3_0_geni_se/a80000.spi/spi_master/spi0/spi0.0/fts_gesture_mode 1
+
 on property:vendor.nfc.config_file_name=*
     setprop persist.vendor.nfc.config_file_name ${vendor.nfc.config_file_name}
 
@@ -107,3 +125,21 @@ service asteroids_nfc_detect /odm/bin/init.asteroids.nfc.sh
     group shell
     disabled
     oneshot
+
+service memory-post-boot /vendor/bin/sh /vendor/bin/init.kernel.post_boot-asteroids_memory.sh
+    class core
+    user root
+    group root
+    disabled
+    oneshot
+    override
+
+service gki.modprobe /vendor/bin/system_dlkm_asteroids_modprobe.sh
+    class main
+    user root
+    group root system
+    disabled
+    stdio_to_kmsg
+    seclabel u:r:vendor_modprobe:s0
+    oneshot
+    override

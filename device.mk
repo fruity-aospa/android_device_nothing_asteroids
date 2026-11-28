@@ -190,6 +190,17 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.drm-service.clearkey
 
+# Memory
+PRODUCT_PACKAGES += \
+    libvmmem
+
+# Data
+PRODUCT_SOONG_NAMESPACES += \
+    vendor/qcom/opensource/dataservices
+
+PRODUCT_PACKAGES += \
+    librmnetctl
+
 # Dalvik
 $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 
@@ -252,7 +263,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     fstab.default \
     fstab.default.vendor_ramdisk \
-    fstab.zram.2g \
     init.aospa.perf.common.rc \
     init.aospa.perf.common.sh \
     init.asteroids.hw.rc \
